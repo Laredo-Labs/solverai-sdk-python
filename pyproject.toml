@@ -1,11 +1,11 @@
 [project]
 name = "solver_api"
 version = "0.0.1-alpha.0"
-description = "The official Python library for the solver-api API"
+description = "The official Python library for the solver API"
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
-{ name = "Solver API", email = "hello@solverai.com" },
+{ name = "Solver", email = "hello@solverai.com" },
 ]
 dependencies = [
     "httpx>=0.23.0, <1",

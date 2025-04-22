@@ -6,7 +6,7 @@ import httpx
 import pytest
 import pydantic
 
-from solver_api import BaseModel, SolverAPI, AsyncSolverAPI
+from solver_api import Solver, BaseModel, AsyncSolver
 from solver_api._response import (
     APIResponse,
     BaseAPIResponse,
@@ -56,7 +56,7 @@ def test_extract_response_type_binary_response() -> None:
 class PydanticModel(pydantic.BaseModel): ...
 
 
-def test_response_parse_mismatched_basemodel(client: SolverAPI) -> None:
+def test_response_parse_mismatched_basemodel(client: Solver) -> None:
     response = APIResponse(
         raw=httpx.Response(200, content=b"foo"),
         client=client,
@@ -74,7 +74,7 @@ def test_response_parse_mismatched_basemodel(client: SolverAPI) -> None:
 
 
 @pytest.mark.asyncio
-async def test_async_response_parse_mismatched_basemodel(async_client: AsyncSolverAPI) -> None:
+async def test_async_response_parse_mismatched_basemodel(async_client: AsyncSolver) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=b"foo"),
         client=async_client,
@@ -91,7 +91,7 @@ async def test_async_response_parse_mismatched_basemodel(async_client: AsyncSolv
         await response.parse(to=PydanticModel)
 
 
-def test_response_parse_custom_stream(client: SolverAPI) -> None:
+def test_response_parse_custom_stream(client: Solver) -> None:
     response = APIResponse(
         raw=httpx.Response(200, content=b"foo"),
         client=client,
@@ -106,7 +106,7 @@ def test_response_parse_custom_stream(client: SolverAPI) -> None:
 
 
 @pytest.mark.asyncio
-async def test_async_response_parse_custom_stream(async_client: AsyncSolverAPI) -> None:
+async def test_async_response_parse_custom_stream(async_client: AsyncSolver) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=b"foo"),
         client=async_client,
@@ -125,7 +125,7 @@ class CustomModel(BaseModel):
     bar: int
 
 
-def test_response_parse_custom_model(client: SolverAPI) -> None:
+def test_response_parse_custom_model(client: Solver) -> None:
     response = APIResponse(
         raw=httpx.Response(200, content=json.dumps({"foo": "hello!", "bar": 2})),
         client=client,
@@ -141,7 +141,7 @@ def test_response_parse_custom_model(client: SolverAPI) -> None:
 
 
 @pytest.mark.asyncio
-async def test_async_response_parse_custom_model(async_client: AsyncSolverAPI) -> None:
+async def test_async_response_parse_custom_model(async_client: AsyncSolver) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=json.dumps({"foo": "hello!", "bar": 2})),
         client=async_client,
@@ -156,7 +156,7 @@ async def test_async_response_parse_custom_model(async_client: AsyncSolverAPI) -
     assert obj.bar == 2
 
 
-def test_response_parse_annotated_type(client: SolverAPI) -> None:
+def test_response_parse_annotated_type(client: Solver) -> None:
     response = APIResponse(
         raw=httpx.Response(200, content=json.dumps({"foo": "hello!", "bar": 2})),
         client=client,
@@ -173,7 +173,7 @@ def test_response_parse_annotated_type(client: SolverAPI) -> None:
     assert obj.bar == 2
 
 
-async def test_async_response_parse_annotated_type(async_client: AsyncSolverAPI) -> None:
+async def test_async_response_parse_annotated_type(async_client: AsyncSolver) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=json.dumps({"foo": "hello!", "bar": 2})),
         client=async_client,
@@ -201,7 +201,7 @@ async def test_async_response_parse_annotated_type(async_client: AsyncSolverAPI)
         ("FalSe", False),
     ],
 )
-def test_response_parse_bool(client: SolverAPI, content: str, expected: bool) -> None:
+def test_response_parse_bool(client: Solver, content: str, expected: bool) -> None:
     response = APIResponse(
         raw=httpx.Response(200, content=content),
         client=client,
@@ -226,7 +226,7 @@ def test_response_parse_bool(client: SolverAPI, content: str, expected: bool) ->
         ("FalSe", False),
     ],
 )
-async def test_async_response_parse_bool(client: AsyncSolverAPI, content: str, expected: bool) -> None:
+async def test_async_response_parse_bool(client: AsyncSolver, content: str, expected: bool) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=content),
         client=client,
@@ -245,7 +245,7 @@ class OtherModel(BaseModel):
 
 
 @pytest.mark.parametrize("client", [False], indirect=True)  # loose validation
-def test_response_parse_expect_model_union_non_json_content(client: SolverAPI) -> None:
+def test_response_parse_expect_model_union_non_json_content(client: Solver) -> None:
     response = APIResponse(
         raw=httpx.Response(200, content=b"foo", headers={"Content-Type": "application/text"}),
         client=client,
@@ -262,7 +262,7 @@ def test_response_parse_expect_model_union_non_json_content(client: SolverAPI) -
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("async_client", [False], indirect=True)  # loose validation
-async def test_async_response_parse_expect_model_union_non_json_content(async_client: AsyncSolverAPI) -> None:
+async def test_async_response_parse_expect_model_union_non_json_content(async_client: AsyncSolver) -> None:
     response = AsyncAPIResponse(
         raw=httpx.Response(200, content=b"foo", headers={"Content-Type": "application/text"}),
         client=async_client,

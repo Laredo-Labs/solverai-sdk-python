@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from solver_api import SolverAPI, AsyncSolverAPI
+from solver_api import Solver, AsyncSolver
 from tests.utils import assert_matches_type
 from solver_api.types.repos import (
     Turn,
@@ -24,7 +24,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_create(self, client: SolverAPI) -> None:
+    def test_method_create(self, client: Solver) -> None:
         session = client.repos.sessions.create(
             repo="repo",
             provider="github",
@@ -35,7 +35,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_create_with_all_params(self, client: SolverAPI) -> None:
+    def test_method_create_with_all_params(self, client: Solver) -> None:
         session = client.repos.sessions.create(
             repo="repo",
             provider="github",
@@ -49,7 +49,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_create(self, client: SolverAPI) -> None:
+    def test_raw_response_create(self, client: Solver) -> None:
         response = client.repos.sessions.with_raw_response.create(
             repo="repo",
             provider="github",
@@ -64,7 +64,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_create(self, client: SolverAPI) -> None:
+    def test_streaming_response_create(self, client: Solver) -> None:
         with client.repos.sessions.with_streaming_response.create(
             repo="repo",
             provider="github",
@@ -81,7 +81,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_path_params_create(self, client: SolverAPI) -> None:
+    def test_path_params_create(self, client: Solver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
             client.repos.sessions.with_raw_response.create(
                 repo="repo",
@@ -100,7 +100,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_retrieve(self, client: SolverAPI) -> None:
+    def test_method_retrieve(self, client: Solver) -> None:
         session = client.repos.sessions.retrieve(
             session_id="sessionId",
             provider="github",
@@ -111,7 +111,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_retrieve(self, client: SolverAPI) -> None:
+    def test_raw_response_retrieve(self, client: Solver) -> None:
         response = client.repos.sessions.with_raw_response.retrieve(
             session_id="sessionId",
             provider="github",
@@ -126,7 +126,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_retrieve(self, client: SolverAPI) -> None:
+    def test_streaming_response_retrieve(self, client: Solver) -> None:
         with client.repos.sessions.with_streaming_response.retrieve(
             session_id="sessionId",
             provider="github",
@@ -143,7 +143,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_path_params_retrieve(self, client: SolverAPI) -> None:
+    def test_path_params_retrieve(self, client: Solver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
             client.repos.sessions.with_raw_response.retrieve(
                 session_id="sessionId",
@@ -170,7 +170,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_list(self, client: SolverAPI) -> None:
+    def test_method_list(self, client: Solver) -> None:
         session = client.repos.sessions.list(
             repo="repo",
             provider="github",
@@ -180,7 +180,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_list_with_all_params(self, client: SolverAPI) -> None:
+    def test_method_list_with_all_params(self, client: Solver) -> None:
         session = client.repos.sessions.list(
             repo="repo",
             provider="github",
@@ -197,7 +197,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_list(self, client: SolverAPI) -> None:
+    def test_raw_response_list(self, client: Solver) -> None:
         response = client.repos.sessions.with_raw_response.list(
             repo="repo",
             provider="github",
@@ -211,7 +211,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_list(self, client: SolverAPI) -> None:
+    def test_streaming_response_list(self, client: Solver) -> None:
         with client.repos.sessions.with_streaming_response.list(
             repo="repo",
             provider="github",
@@ -227,7 +227,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_path_params_list(self, client: SolverAPI) -> None:
+    def test_path_params_list(self, client: Solver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
             client.repos.sessions.with_raw_response.list(
                 repo="repo",
@@ -244,7 +244,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_patch(self, client: SolverAPI) -> None:
+    def test_method_patch(self, client: Solver) -> None:
         session = client.repos.sessions.patch(
             session_id="sessionId",
             provider="github",
@@ -255,7 +255,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_patch_with_all_params(self, client: SolverAPI) -> None:
+    def test_method_patch_with_all_params(self, client: Solver) -> None:
         session = client.repos.sessions.patch(
             session_id="sessionId",
             provider="github",
@@ -268,7 +268,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_patch(self, client: SolverAPI) -> None:
+    def test_raw_response_patch(self, client: Solver) -> None:
         response = client.repos.sessions.with_raw_response.patch(
             session_id="sessionId",
             provider="github",
@@ -283,7 +283,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_patch(self, client: SolverAPI) -> None:
+    def test_streaming_response_patch(self, client: Solver) -> None:
         with client.repos.sessions.with_streaming_response.patch(
             session_id="sessionId",
             provider="github",
@@ -300,7 +300,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_path_params_patch(self, client: SolverAPI) -> None:
+    def test_path_params_patch(self, client: Solver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
             client.repos.sessions.with_raw_response.patch(
                 session_id="sessionId",
@@ -327,7 +327,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_solve(self, client: SolverAPI) -> None:
+    def test_method_solve(self, client: Solver) -> None:
         session = client.repos.sessions.solve(
             session_id="sessionId",
             provider="github",
@@ -340,7 +340,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_solve_with_all_params(self, client: SolverAPI) -> None:
+    def test_method_solve_with_all_params(self, client: Solver) -> None:
         session = client.repos.sessions.solve(
             session_id="sessionId",
             provider="github",
@@ -354,7 +354,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_solve(self, client: SolverAPI) -> None:
+    def test_raw_response_solve(self, client: Solver) -> None:
         response = client.repos.sessions.with_raw_response.solve(
             session_id="sessionId",
             provider="github",
@@ -371,7 +371,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_solve(self, client: SolverAPI) -> None:
+    def test_streaming_response_solve(self, client: Solver) -> None:
         with client.repos.sessions.with_streaming_response.solve(
             session_id="sessionId",
             provider="github",
@@ -390,7 +390,7 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_path_params_solve(self, client: SolverAPI) -> None:
+    def test_path_params_solve(self, client: Solver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
             client.repos.sessions.with_raw_response.solve(
                 session_id="sessionId",
@@ -427,7 +427,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_create(self, async_client: AsyncSolverAPI) -> None:
+    async def test_method_create(self, async_client: AsyncSolver) -> None:
         session = await async_client.repos.sessions.create(
             repo="repo",
             provider="github",
@@ -438,7 +438,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_create_with_all_params(self, async_client: AsyncSolverAPI) -> None:
+    async def test_method_create_with_all_params(self, async_client: AsyncSolver) -> None:
         session = await async_client.repos.sessions.create(
             repo="repo",
             provider="github",
@@ -452,7 +452,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_create(self, async_client: AsyncSolverAPI) -> None:
+    async def test_raw_response_create(self, async_client: AsyncSolver) -> None:
         response = await async_client.repos.sessions.with_raw_response.create(
             repo="repo",
             provider="github",
@@ -467,7 +467,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncSolverAPI) -> None:
+    async def test_streaming_response_create(self, async_client: AsyncSolver) -> None:
         async with async_client.repos.sessions.with_streaming_response.create(
             repo="repo",
             provider="github",
@@ -484,7 +484,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_path_params_create(self, async_client: AsyncSolverAPI) -> None:
+    async def test_path_params_create(self, async_client: AsyncSolver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
             await async_client.repos.sessions.with_raw_response.create(
                 repo="repo",
@@ -503,7 +503,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncSolverAPI) -> None:
+    async def test_method_retrieve(self, async_client: AsyncSolver) -> None:
         session = await async_client.repos.sessions.retrieve(
             session_id="sessionId",
             provider="github",
@@ -514,7 +514,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncSolverAPI) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncSolver) -> None:
         response = await async_client.repos.sessions.with_raw_response.retrieve(
             session_id="sessionId",
             provider="github",
@@ -529,7 +529,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncSolverAPI) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncSolver) -> None:
         async with async_client.repos.sessions.with_streaming_response.retrieve(
             session_id="sessionId",
             provider="github",
@@ -546,7 +546,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncSolverAPI) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncSolver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
             await async_client.repos.sessions.with_raw_response.retrieve(
                 session_id="sessionId",
@@ -573,7 +573,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_list(self, async_client: AsyncSolverAPI) -> None:
+    async def test_method_list(self, async_client: AsyncSolver) -> None:
         session = await async_client.repos.sessions.list(
             repo="repo",
             provider="github",
@@ -583,7 +583,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_list_with_all_params(self, async_client: AsyncSolverAPI) -> None:
+    async def test_method_list_with_all_params(self, async_client: AsyncSolver) -> None:
         session = await async_client.repos.sessions.list(
             repo="repo",
             provider="github",
@@ -600,7 +600,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_list(self, async_client: AsyncSolverAPI) -> None:
+    async def test_raw_response_list(self, async_client: AsyncSolver) -> None:
         response = await async_client.repos.sessions.with_raw_response.list(
             repo="repo",
             provider="github",
@@ -614,7 +614,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncSolverAPI) -> None:
+    async def test_streaming_response_list(self, async_client: AsyncSolver) -> None:
         async with async_client.repos.sessions.with_streaming_response.list(
             repo="repo",
             provider="github",
@@ -630,7 +630,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_path_params_list(self, async_client: AsyncSolverAPI) -> None:
+    async def test_path_params_list(self, async_client: AsyncSolver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
             await async_client.repos.sessions.with_raw_response.list(
                 repo="repo",
@@ -647,7 +647,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_patch(self, async_client: AsyncSolverAPI) -> None:
+    async def test_method_patch(self, async_client: AsyncSolver) -> None:
         session = await async_client.repos.sessions.patch(
             session_id="sessionId",
             provider="github",
@@ -658,7 +658,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_patch_with_all_params(self, async_client: AsyncSolverAPI) -> None:
+    async def test_method_patch_with_all_params(self, async_client: AsyncSolver) -> None:
         session = await async_client.repos.sessions.patch(
             session_id="sessionId",
             provider="github",
@@ -671,7 +671,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_patch(self, async_client: AsyncSolverAPI) -> None:
+    async def test_raw_response_patch(self, async_client: AsyncSolver) -> None:
         response = await async_client.repos.sessions.with_raw_response.patch(
             session_id="sessionId",
             provider="github",
@@ -686,7 +686,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_patch(self, async_client: AsyncSolverAPI) -> None:
+    async def test_streaming_response_patch(self, async_client: AsyncSolver) -> None:
         async with async_client.repos.sessions.with_streaming_response.patch(
             session_id="sessionId",
             provider="github",
@@ -703,7 +703,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_path_params_patch(self, async_client: AsyncSolverAPI) -> None:
+    async def test_path_params_patch(self, async_client: AsyncSolver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
             await async_client.repos.sessions.with_raw_response.patch(
                 session_id="sessionId",
@@ -730,7 +730,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_solve(self, async_client: AsyncSolverAPI) -> None:
+    async def test_method_solve(self, async_client: AsyncSolver) -> None:
         session = await async_client.repos.sessions.solve(
             session_id="sessionId",
             provider="github",
@@ -743,7 +743,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_solve_with_all_params(self, async_client: AsyncSolverAPI) -> None:
+    async def test_method_solve_with_all_params(self, async_client: AsyncSolver) -> None:
         session = await async_client.repos.sessions.solve(
             session_id="sessionId",
             provider="github",
@@ -757,7 +757,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_solve(self, async_client: AsyncSolverAPI) -> None:
+    async def test_raw_response_solve(self, async_client: AsyncSolver) -> None:
         response = await async_client.repos.sessions.with_raw_response.solve(
             session_id="sessionId",
             provider="github",
@@ -774,7 +774,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_solve(self, async_client: AsyncSolverAPI) -> None:
+    async def test_streaming_response_solve(self, async_client: AsyncSolver) -> None:
         async with async_client.repos.sessions.with_streaming_response.solve(
             session_id="sessionId",
             provider="github",
@@ -793,7 +793,7 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_path_params_solve(self, async_client: AsyncSolverAPI) -> None:
+    async def test_path_params_solve(self, async_client: AsyncSolver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
             await async_client.repos.sessions.with_raw_response.solve(
                 session_id="sessionId",

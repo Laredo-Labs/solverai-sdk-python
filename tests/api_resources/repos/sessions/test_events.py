@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from solver_api import SolverAPI, AsyncSolverAPI
+from solver_api import Solver, AsyncSolver
 from tests.utils import assert_matches_type
 from solver_api.types.repos.sessions import TraceEvent, EventPatchResponse
 
@@ -19,7 +19,7 @@ class TestEvents:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_retrieve(self, client: SolverAPI) -> None:
+    def test_method_retrieve(self, client: Solver) -> None:
         event = client.repos.sessions.events.retrieve(
             event_id="eventId",
             provider="github",
@@ -31,7 +31,7 @@ class TestEvents:
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_retrieve(self, client: SolverAPI) -> None:
+    def test_raw_response_retrieve(self, client: Solver) -> None:
         response = client.repos.sessions.events.with_raw_response.retrieve(
             event_id="eventId",
             provider="github",
@@ -47,7 +47,7 @@ class TestEvents:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_retrieve(self, client: SolverAPI) -> None:
+    def test_streaming_response_retrieve(self, client: Solver) -> None:
         with client.repos.sessions.events.with_streaming_response.retrieve(
             event_id="eventId",
             provider="github",
@@ -65,7 +65,7 @@ class TestEvents:
 
     @pytest.mark.skip()
     @parametrize
-    def test_path_params_retrieve(self, client: SolverAPI) -> None:
+    def test_path_params_retrieve(self, client: Solver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
             client.repos.sessions.events.with_raw_response.retrieve(
                 event_id="eventId",
@@ -104,7 +104,7 @@ class TestEvents:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_patch(self, client: SolverAPI) -> None:
+    def test_method_patch(self, client: Solver) -> None:
         event = client.repos.sessions.events.patch(
             event_id="eventId",
             provider="github",
@@ -116,7 +116,7 @@ class TestEvents:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_patch_with_all_params(self, client: SolverAPI) -> None:
+    def test_method_patch_with_all_params(self, client: Solver) -> None:
         event = client.repos.sessions.events.patch(
             event_id="eventId",
             provider="github",
@@ -130,7 +130,7 @@ class TestEvents:
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_patch(self, client: SolverAPI) -> None:
+    def test_raw_response_patch(self, client: Solver) -> None:
         response = client.repos.sessions.events.with_raw_response.patch(
             event_id="eventId",
             provider="github",
@@ -146,7 +146,7 @@ class TestEvents:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_patch(self, client: SolverAPI) -> None:
+    def test_streaming_response_patch(self, client: Solver) -> None:
         with client.repos.sessions.events.with_streaming_response.patch(
             event_id="eventId",
             provider="github",
@@ -164,7 +164,7 @@ class TestEvents:
 
     @pytest.mark.skip()
     @parametrize
-    def test_path_params_patch(self, client: SolverAPI) -> None:
+    def test_path_params_patch(self, client: Solver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
             client.repos.sessions.events.with_raw_response.patch(
                 event_id="eventId",
@@ -205,7 +205,7 @@ class TestEvents:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    def test_method_stream(self, client: SolverAPI) -> None:
+    def test_method_stream(self, client: Solver) -> None:
         event_stream = client.repos.sessions.events.stream(
             session_id="sessionId",
             provider="github",
@@ -218,7 +218,7 @@ class TestEvents:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    def test_raw_response_stream(self, client: SolverAPI) -> None:
+    def test_raw_response_stream(self, client: Solver) -> None:
         response = client.repos.sessions.events.with_raw_response.stream(
             session_id="sessionId",
             provider="github",
@@ -234,7 +234,7 @@ class TestEvents:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    def test_streaming_response_stream(self, client: SolverAPI) -> None:
+    def test_streaming_response_stream(self, client: Solver) -> None:
         with client.repos.sessions.events.with_streaming_response.stream(
             session_id="sessionId",
             provider="github",
@@ -253,7 +253,7 @@ class TestEvents:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    def test_path_params_stream(self, client: SolverAPI) -> None:
+    def test_path_params_stream(self, client: Solver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
             client.repos.sessions.events.with_raw_response.stream(
                 session_id="sessionId",
@@ -284,7 +284,7 @@ class TestAsyncEvents:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncSolverAPI) -> None:
+    async def test_method_retrieve(self, async_client: AsyncSolver) -> None:
         event = await async_client.repos.sessions.events.retrieve(
             event_id="eventId",
             provider="github",
@@ -296,7 +296,7 @@ class TestAsyncEvents:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncSolverAPI) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncSolver) -> None:
         response = await async_client.repos.sessions.events.with_raw_response.retrieve(
             event_id="eventId",
             provider="github",
@@ -312,7 +312,7 @@ class TestAsyncEvents:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncSolverAPI) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncSolver) -> None:
         async with async_client.repos.sessions.events.with_streaming_response.retrieve(
             event_id="eventId",
             provider="github",
@@ -330,7 +330,7 @@ class TestAsyncEvents:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncSolverAPI) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncSolver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
             await async_client.repos.sessions.events.with_raw_response.retrieve(
                 event_id="eventId",
@@ -369,7 +369,7 @@ class TestAsyncEvents:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_patch(self, async_client: AsyncSolverAPI) -> None:
+    async def test_method_patch(self, async_client: AsyncSolver) -> None:
         event = await async_client.repos.sessions.events.patch(
             event_id="eventId",
             provider="github",
@@ -381,7 +381,7 @@ class TestAsyncEvents:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_patch_with_all_params(self, async_client: AsyncSolverAPI) -> None:
+    async def test_method_patch_with_all_params(self, async_client: AsyncSolver) -> None:
         event = await async_client.repos.sessions.events.patch(
             event_id="eventId",
             provider="github",
@@ -395,7 +395,7 @@ class TestAsyncEvents:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_patch(self, async_client: AsyncSolverAPI) -> None:
+    async def test_raw_response_patch(self, async_client: AsyncSolver) -> None:
         response = await async_client.repos.sessions.events.with_raw_response.patch(
             event_id="eventId",
             provider="github",
@@ -411,7 +411,7 @@ class TestAsyncEvents:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_patch(self, async_client: AsyncSolverAPI) -> None:
+    async def test_streaming_response_patch(self, async_client: AsyncSolver) -> None:
         async with async_client.repos.sessions.events.with_streaming_response.patch(
             event_id="eventId",
             provider="github",
@@ -429,7 +429,7 @@ class TestAsyncEvents:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_path_params_patch(self, async_client: AsyncSolverAPI) -> None:
+    async def test_path_params_patch(self, async_client: AsyncSolver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
             await async_client.repos.sessions.events.with_raw_response.patch(
                 event_id="eventId",
@@ -470,7 +470,7 @@ class TestAsyncEvents:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    async def test_method_stream(self, async_client: AsyncSolverAPI) -> None:
+    async def test_method_stream(self, async_client: AsyncSolver) -> None:
         event_stream = await async_client.repos.sessions.events.stream(
             session_id="sessionId",
             provider="github",
@@ -483,7 +483,7 @@ class TestAsyncEvents:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    async def test_raw_response_stream(self, async_client: AsyncSolverAPI) -> None:
+    async def test_raw_response_stream(self, async_client: AsyncSolver) -> None:
         response = await async_client.repos.sessions.events.with_raw_response.stream(
             session_id="sessionId",
             provider="github",
@@ -499,7 +499,7 @@ class TestAsyncEvents:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    async def test_streaming_response_stream(self, async_client: AsyncSolverAPI) -> None:
+    async def test_streaming_response_stream(self, async_client: AsyncSolver) -> None:
         async with async_client.repos.sessions.events.with_streaming_response.stream(
             session_id="sessionId",
             provider="github",
@@ -518,7 +518,7 @@ class TestAsyncEvents:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    async def test_path_params_stream(self, async_client: AsyncSolverAPI) -> None:
+    async def test_path_params_stream(self, async_client: AsyncSolver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
             await async_client.repos.sessions.events.with_raw_response.stream(
                 session_id="sessionId",

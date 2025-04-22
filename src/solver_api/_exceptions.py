@@ -18,11 +18,11 @@ __all__ = [
 ]
 
 
-class SolverAPIError(Exception):
+class SolverError(Exception):
     pass
 
 
-class APIError(SolverAPIError):
+class APIError(SolverError):
     message: str
     request: httpx.Request
 

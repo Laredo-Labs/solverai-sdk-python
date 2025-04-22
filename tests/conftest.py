@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING, Iterator, AsyncIterator
 import pytest
 from pytest_asyncio import is_async_test
 
-from solver_api import SolverAPI, AsyncSolverAPI
+from solver_api import Solver, AsyncSolver
 
 if TYPE_CHECKING:
     from _pytest.fixtures import FixtureRequest  # pyright: ignore[reportPrivateImportUsage]
@@ -32,20 +32,20 @@ api_key = "My API Key"
 
 
 @pytest.fixture(scope="session")
-def client(request: FixtureRequest) -> Iterator[SolverAPI]:
+def client(request: FixtureRequest) -> Iterator[Solver]:
     strict = getattr(request, "param", True)
     if not isinstance(strict, bool):
         raise TypeError(f"Unexpected fixture parameter type {type(strict)}, expected {bool}")
 
-    with SolverAPI(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
+    with Solver(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
         yield client
 
 
 @pytest.fixture(scope="session")
-async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncSolverAPI]:
+async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncSolver]:
     strict = getattr(request, "param", True)
     if not isinstance(strict, bool):
         raise TypeError(f"Unexpected fixture parameter type {type(strict)}, expected {bool}")
 
-    async with AsyncSolverAPI(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
+    async with AsyncSolver(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
         yield client

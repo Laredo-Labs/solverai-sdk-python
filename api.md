@@ -3,12 +3,12 @@
 Types:
 
 ```python
-from solver_api.types import VcsProvider, RepoRetrieveResponse
+from solver_api.types import VcsProvider, RepoListResponse
 ```
 
 Methods:
 
-- <code title="get /repos/{provider}">client.repos.<a href="./src/solver_api/resources/repos/repos.py">retrieve</a>(provider) -> <a href="./src/solver_api/types/repo_retrieve_response.py">RepoRetrieveResponse</a></code>
+- <code title="get /repos/{provider}">client.repos.<a href="./src/solver_api/resources/repos/repos.py">list</a>(provider) -> <a href="./src/solver_api/types/repo_list_response.py">RepoListResponse</a></code>
 
 ## Sessions
 
