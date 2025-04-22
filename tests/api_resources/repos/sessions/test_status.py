@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from solver_api import SolverAPI, AsyncSolverAPI
+from solver_api import Solver, AsyncSolver
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,7 +19,7 @@ class TestStatus:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    def test_method_stream(self, client: SolverAPI) -> None:
+    def test_method_stream(self, client: Solver) -> None:
         status_stream = client.repos.sessions.status.stream(
             repo="repo",
             provider="github",
@@ -31,7 +31,7 @@ class TestStatus:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    def test_method_stream_with_all_params(self, client: SolverAPI) -> None:
+    def test_method_stream_with_all_params(self, client: Solver) -> None:
         status_stream = client.repos.sessions.status.stream(
             repo="repo",
             provider="github",
@@ -44,7 +44,7 @@ class TestStatus:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    def test_raw_response_stream(self, client: SolverAPI) -> None:
+    def test_raw_response_stream(self, client: Solver) -> None:
         response = client.repos.sessions.status.with_raw_response.stream(
             repo="repo",
             provider="github",
@@ -59,7 +59,7 @@ class TestStatus:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    def test_streaming_response_stream(self, client: SolverAPI) -> None:
+    def test_streaming_response_stream(self, client: Solver) -> None:
         with client.repos.sessions.status.with_streaming_response.stream(
             repo="repo",
             provider="github",
@@ -77,7 +77,7 @@ class TestStatus:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    def test_path_params_stream(self, client: SolverAPI) -> None:
+    def test_path_params_stream(self, client: Solver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
             client.repos.sessions.status.with_raw_response.stream(
                 repo="repo",
@@ -100,7 +100,7 @@ class TestAsyncStatus:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    async def test_method_stream(self, async_client: AsyncSolverAPI) -> None:
+    async def test_method_stream(self, async_client: AsyncSolver) -> None:
         status_stream = await async_client.repos.sessions.status.stream(
             repo="repo",
             provider="github",
@@ -112,7 +112,7 @@ class TestAsyncStatus:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    async def test_method_stream_with_all_params(self, async_client: AsyncSolverAPI) -> None:
+    async def test_method_stream_with_all_params(self, async_client: AsyncSolver) -> None:
         status_stream = await async_client.repos.sessions.status.stream(
             repo="repo",
             provider="github",
@@ -125,7 +125,7 @@ class TestAsyncStatus:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    async def test_raw_response_stream(self, async_client: AsyncSolverAPI) -> None:
+    async def test_raw_response_stream(self, async_client: AsyncSolver) -> None:
         response = await async_client.repos.sessions.status.with_raw_response.stream(
             repo="repo",
             provider="github",
@@ -140,7 +140,7 @@ class TestAsyncStatus:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    async def test_streaming_response_stream(self, async_client: AsyncSolverAPI) -> None:
+    async def test_streaming_response_stream(self, async_client: AsyncSolver) -> None:
         async with async_client.repos.sessions.status.with_streaming_response.stream(
             repo="repo",
             provider="github",
@@ -158,7 +158,7 @@ class TestAsyncStatus:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    async def test_path_params_stream(self, async_client: AsyncSolverAPI) -> None:
+    async def test_path_params_stream(self, async_client: AsyncSolver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
             await async_client.repos.sessions.status.with_raw_response.stream(
                 repo="repo",

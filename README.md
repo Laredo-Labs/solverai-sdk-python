@@ -1,8 +1,8 @@
-# Solver API Python API library
+# Solver Python API library
 
 [![PyPI version](https://img.shields.io/pypi/v/solver_api.svg)](https://pypi.org/project/solver_api/)
 
-The Solver API Python library provides convenient access to the Solver API REST API from any Python 3.8+
+The Solver Python library provides convenient access to the Solver REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
@@ -28,13 +28,13 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from solver_api import SolverAPI
+from solver_api import Solver
 
-client = SolverAPI(
+client = Solver(
     api_key=os.environ.get("SOLVER_API_API_KEY"),  # This is the default and can be omitted
 )
 
-repos = client.repos.retrieve(
+repos = client.repos.list(
     "REPLACE_ME",
 )
 ```
@@ -46,20 +46,20 @@ so that your API Key is not stored in source control.
 
 ## Async usage
 
-Simply import `AsyncSolverAPI` instead of `SolverAPI` and use `await` with each API call:
+Simply import `AsyncSolver` instead of `Solver` and use `await` with each API call:
 
 ```python
 import os
 import asyncio
-from solver_api import AsyncSolverAPI
+from solver_api import AsyncSolver
 
-client = AsyncSolverAPI(
+client = AsyncSolver(
     api_key=os.environ.get("SOLVER_API_API_KEY"),  # This is the default and can be omitted
 )
 
 
 async def main() -> None:
-    repos = await client.repos.retrieve(
+    repos = await client.repos.list(
         "REPLACE_ME",
     )
 
@@ -89,12 +89,12 @@ All errors inherit from `solver_api.APIError`.
 
 ```python
 import solver_api
-from solver_api import SolverAPI
+from solver_api import Solver
 
-client = SolverAPI()
+client = Solver()
 
 try:
-    client.repos.retrieve(
+    client.repos.list(
         "REPLACE_ME",
     )
 except solver_api.APIConnectionError as e:
@@ -130,16 +130,16 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from solver_api import SolverAPI
+from solver_api import Solver
 
 # Configure the default for all requests:
-client = SolverAPI(
+client = Solver(
     # default is 2
     max_retries=0,
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).repos.retrieve(
+client.with_options(max_retries=5).repos.list(
     "REPLACE_ME",
 )
 ```
@@ -150,21 +150,21 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
 
 ```python
-from solver_api import SolverAPI
+from solver_api import Solver
 
 # Configure the default for all requests:
-client = SolverAPI(
+client = Solver(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
 )
 
 # More granular control:
-client = SolverAPI(
+client = Solver(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).repos.retrieve(
+client.with_options(timeout=5.0).repos.list(
     "REPLACE_ME",
 )
 ```
@@ -179,10 +179,10 @@ Note that requests that time out are [retried twice by default](#retries).
 
 We use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.
 
-You can enable logging by setting the environment variable `SOLVER_API_LOG` to `info`.
+You can enable logging by setting the environment variable `SOLVER_LOG` to `info`.
 
 ```shell
-$ export SOLVER_API_LOG=info
+$ export SOLVER_LOG=info
 ```
 
 Or to `debug` for more verbose logging.
@@ -204,15 +204,15 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from solver_api import SolverAPI
+from solver_api import Solver
 
-client = SolverAPI()
-response = client.repos.with_raw_response.retrieve(
+client = Solver()
+response = client.repos.with_raw_response.list(
     "REPLACE_ME",
 )
 print(response.headers.get('X-My-Header'))
 
-repo = response.parse()  # get the object that `repos.retrieve()` would have returned
+repo = response.parse()  # get the object that `repos.list()` would have returned
 print(repo)
 ```
 
@@ -227,7 +227,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.repos.with_streaming_response.retrieve(
+with client.repos.with_streaming_response.list(
     "REPLACE_ME",
 ) as response:
     print(response.headers.get("X-My-Header"))
@@ -282,10 +282,10 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 
 ```python
 import httpx
-from solver_api import SolverAPI, DefaultHttpxClient
+from solver_api import Solver, DefaultHttpxClient
 
-client = SolverAPI(
-    # Or use the `SOLVER_API_BASE_URL` env var
+client = Solver(
+    # Or use the `SOLVER_BASE_URL` env var
     base_url="http://my.test.server.example.com:8083",
     http_client=DefaultHttpxClient(
         proxy="http://my.test.proxy.example.com",
@@ -305,9 +305,9 @@ client.with_options(http_client=DefaultHttpxClient(...))
 By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
 
 ```py
-from solver_api import SolverAPI
+from solver_api import Solver
 
-with SolverAPI() as client:
+with Solver() as client:
   # make requests here
   ...
 

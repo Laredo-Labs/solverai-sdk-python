@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from solver_api import SolverAPI, AsyncSolverAPI
+from solver_api import Solver, AsyncSolver
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,7 +19,7 @@ class TestEvents:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    def test_method_stream(self, client: SolverAPI) -> None:
+    def test_method_stream(self, client: Solver) -> None:
         event_stream = client.repos.sessions.turns.events.stream(
             turn_id="turnId",
             provider="github",
@@ -33,7 +33,7 @@ class TestEvents:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    def test_raw_response_stream(self, client: SolverAPI) -> None:
+    def test_raw_response_stream(self, client: Solver) -> None:
         response = client.repos.sessions.turns.events.with_raw_response.stream(
             turn_id="turnId",
             provider="github",
@@ -50,7 +50,7 @@ class TestEvents:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    def test_streaming_response_stream(self, client: SolverAPI) -> None:
+    def test_streaming_response_stream(self, client: Solver) -> None:
         with client.repos.sessions.turns.events.with_streaming_response.stream(
             turn_id="turnId",
             provider="github",
@@ -70,7 +70,7 @@ class TestEvents:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    def test_path_params_stream(self, client: SolverAPI) -> None:
+    def test_path_params_stream(self, client: Solver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
             client.repos.sessions.turns.events.with_raw_response.stream(
                 turn_id="turnId",
@@ -115,7 +115,7 @@ class TestAsyncEvents:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    async def test_method_stream(self, async_client: AsyncSolverAPI) -> None:
+    async def test_method_stream(self, async_client: AsyncSolver) -> None:
         event_stream = await async_client.repos.sessions.turns.events.stream(
             turn_id="turnId",
             provider="github",
@@ -129,7 +129,7 @@ class TestAsyncEvents:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    async def test_raw_response_stream(self, async_client: AsyncSolverAPI) -> None:
+    async def test_raw_response_stream(self, async_client: AsyncSolver) -> None:
         response = await async_client.repos.sessions.turns.events.with_raw_response.stream(
             turn_id="turnId",
             provider="github",
@@ -146,7 +146,7 @@ class TestAsyncEvents:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    async def test_streaming_response_stream(self, async_client: AsyncSolverAPI) -> None:
+    async def test_streaming_response_stream(self, async_client: AsyncSolver) -> None:
         async with async_client.repos.sessions.turns.events.with_streaming_response.stream(
             turn_id="turnId",
             provider="github",
@@ -166,7 +166,7 @@ class TestAsyncEvents:
         reason="currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail"
     )
     @parametrize
-    async def test_path_params_stream(self, async_client: AsyncSolverAPI) -> None:
+    async def test_path_params_stream(self, async_client: AsyncSolver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
             await async_client.repos.sessions.turns.events.with_raw_response.stream(
                 turn_id="turnId",

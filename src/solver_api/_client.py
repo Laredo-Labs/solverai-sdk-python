@@ -25,7 +25,7 @@ from ._utils import (
 )
 from ._version import __version__
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
-from ._exceptions import APIStatusError, SolverAPIError
+from ._exceptions import SolverError, APIStatusError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -33,22 +33,13 @@ from ._base_client import (
 )
 from .resources.repos import repos
 
-__all__ = [
-    "Timeout",
-    "Transport",
-    "ProxiesTypes",
-    "RequestOptions",
-    "SolverAPI",
-    "AsyncSolverAPI",
-    "Client",
-    "AsyncClient",
-]
+__all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Solver", "AsyncSolver", "Client", "AsyncClient"]
 
 
-class SolverAPI(SyncAPIClient):
+class Solver(SyncAPIClient):
     repos: repos.ReposResource
-    with_raw_response: SolverAPIWithRawResponse
-    with_streaming_response: SolverAPIWithStreamedResponse
+    with_raw_response: SolverWithRawResponse
+    with_streaming_response: SolverWithStreamedResponse
 
     # client options
     api_key: str
@@ -76,20 +67,20 @@ class SolverAPI(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous SolverAPI client instance.
+        """Construct a new synchronous Solver client instance.
 
         This automatically infers the `api_key` argument from the `SOLVER_API_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
             api_key = os.environ.get("SOLVER_API_API_KEY")
         if api_key is None:
-            raise SolverAPIError(
+            raise SolverError(
                 "The api_key client option must be set either by passing api_key to the client or by setting the SOLVER_API_API_KEY environment variable"
             )
         self.api_key = api_key
 
         if base_url is None:
-            base_url = os.environ.get("SOLVER_API_BASE_URL")
+            base_url = os.environ.get("SOLVER_BASE_URL")
         if base_url is None:
             base_url = f"https://api.eng.laredolabs.com/alpha/"
 
@@ -105,8 +96,8 @@ class SolverAPI(SyncAPIClient):
         )
 
         self.repos = repos.ReposResource(self)
-        self.with_raw_response = SolverAPIWithRawResponse(self)
-        self.with_streaming_response = SolverAPIWithStreamedResponse(self)
+        self.with_raw_response = SolverWithRawResponse(self)
+        self.with_streaming_response = SolverWithStreamedResponse(self)
 
     @property
     @override
@@ -213,10 +204,10 @@ class SolverAPI(SyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class AsyncSolverAPI(AsyncAPIClient):
+class AsyncSolver(AsyncAPIClient):
     repos: repos.AsyncReposResource
-    with_raw_response: AsyncSolverAPIWithRawResponse
-    with_streaming_response: AsyncSolverAPIWithStreamedResponse
+    with_raw_response: AsyncSolverWithRawResponse
+    with_streaming_response: AsyncSolverWithStreamedResponse
 
     # client options
     api_key: str
@@ -244,20 +235,20 @@ class AsyncSolverAPI(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async AsyncSolverAPI client instance.
+        """Construct a new async AsyncSolver client instance.
 
         This automatically infers the `api_key` argument from the `SOLVER_API_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
             api_key = os.environ.get("SOLVER_API_API_KEY")
         if api_key is None:
-            raise SolverAPIError(
+            raise SolverError(
                 "The api_key client option must be set either by passing api_key to the client or by setting the SOLVER_API_API_KEY environment variable"
             )
         self.api_key = api_key
 
         if base_url is None:
-            base_url = os.environ.get("SOLVER_API_BASE_URL")
+            base_url = os.environ.get("SOLVER_BASE_URL")
         if base_url is None:
             base_url = f"https://api.eng.laredolabs.com/alpha/"
 
@@ -273,8 +264,8 @@ class AsyncSolverAPI(AsyncAPIClient):
         )
 
         self.repos = repos.AsyncReposResource(self)
-        self.with_raw_response = AsyncSolverAPIWithRawResponse(self)
-        self.with_streaming_response = AsyncSolverAPIWithStreamedResponse(self)
+        self.with_raw_response = AsyncSolverWithRawResponse(self)
+        self.with_streaming_response = AsyncSolverWithStreamedResponse(self)
 
     @property
     @override
@@ -381,26 +372,26 @@ class AsyncSolverAPI(AsyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class SolverAPIWithRawResponse:
-    def __init__(self, client: SolverAPI) -> None:
+class SolverWithRawResponse:
+    def __init__(self, client: Solver) -> None:
         self.repos = repos.ReposResourceWithRawResponse(client.repos)
 
 
-class AsyncSolverAPIWithRawResponse:
-    def __init__(self, client: AsyncSolverAPI) -> None:
+class AsyncSolverWithRawResponse:
+    def __init__(self, client: AsyncSolver) -> None:
         self.repos = repos.AsyncReposResourceWithRawResponse(client.repos)
 
 
-class SolverAPIWithStreamedResponse:
-    def __init__(self, client: SolverAPI) -> None:
+class SolverWithStreamedResponse:
+    def __init__(self, client: Solver) -> None:
         self.repos = repos.ReposResourceWithStreamingResponse(client.repos)
 
 
-class AsyncSolverAPIWithStreamedResponse:
-    def __init__(self, client: AsyncSolverAPI) -> None:
+class AsyncSolverWithStreamedResponse:
+    def __init__(self, client: AsyncSolver) -> None:
         self.repos = repos.AsyncReposResourceWithStreamingResponse(client.repos)
 
 
-Client = SolverAPI
+Client = Solver
 
-AsyncClient = AsyncSolverAPI
+AsyncClient = AsyncSolver
