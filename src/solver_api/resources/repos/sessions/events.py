@@ -45,7 +45,7 @@ class EventsResource(SyncAPIResource):
         """
         return EventsResourceWithStreamingResponse(self)
 
-    def retrieve(
+    def get(
         self,
         event_id: str,
         *,
@@ -207,7 +207,7 @@ class AsyncEventsResource(AsyncAPIResource):
         """
         return AsyncEventsResourceWithStreamingResponse(self)
 
-    async def retrieve(
+    async def get(
         self,
         event_id: str,
         *,
@@ -353,8 +353,8 @@ class EventsResourceWithRawResponse:
     def __init__(self, events: EventsResource) -> None:
         self._events = events
 
-        self.retrieve = to_raw_response_wrapper(
-            events.retrieve,
+        self.get = to_raw_response_wrapper(
+            events.get,
         )
         self.patch = to_raw_response_wrapper(
             events.patch,
@@ -368,8 +368,8 @@ class AsyncEventsResourceWithRawResponse:
     def __init__(self, events: AsyncEventsResource) -> None:
         self._events = events
 
-        self.retrieve = async_to_raw_response_wrapper(
-            events.retrieve,
+        self.get = async_to_raw_response_wrapper(
+            events.get,
         )
         self.patch = async_to_raw_response_wrapper(
             events.patch,
@@ -383,8 +383,8 @@ class EventsResourceWithStreamingResponse:
     def __init__(self, events: EventsResource) -> None:
         self._events = events
 
-        self.retrieve = to_streamed_response_wrapper(
-            events.retrieve,
+        self.get = to_streamed_response_wrapper(
+            events.get,
         )
         self.patch = to_streamed_response_wrapper(
             events.patch,
@@ -398,8 +398,8 @@ class AsyncEventsResourceWithStreamingResponse:
     def __init__(self, events: AsyncEventsResource) -> None:
         self._events = events
 
-        self.retrieve = async_to_streamed_response_wrapper(
-            events.retrieve,
+        self.get = async_to_streamed_response_wrapper(
+            events.get,
         )
         self.patch = async_to_streamed_response_wrapper(
             events.patch,

@@ -19,8 +19,8 @@ class TestEvents:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_retrieve(self, client: Solver) -> None:
-        event = client.repos.sessions.events.retrieve(
+    def test_method_get(self, client: Solver) -> None:
+        event = client.repos.sessions.events.get(
             event_id="eventId",
             provider="github",
             org="org",
@@ -31,8 +31,8 @@ class TestEvents:
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_retrieve(self, client: Solver) -> None:
-        response = client.repos.sessions.events.with_raw_response.retrieve(
+    def test_raw_response_get(self, client: Solver) -> None:
+        response = client.repos.sessions.events.with_raw_response.get(
             event_id="eventId",
             provider="github",
             org="org",
@@ -47,8 +47,8 @@ class TestEvents:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_retrieve(self, client: Solver) -> None:
-        with client.repos.sessions.events.with_streaming_response.retrieve(
+    def test_streaming_response_get(self, client: Solver) -> None:
+        with client.repos.sessions.events.with_streaming_response.get(
             event_id="eventId",
             provider="github",
             org="org",
@@ -65,9 +65,9 @@ class TestEvents:
 
     @pytest.mark.skip()
     @parametrize
-    def test_path_params_retrieve(self, client: Solver) -> None:
+    def test_path_params_get(self, client: Solver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
-            client.repos.sessions.events.with_raw_response.retrieve(
+            client.repos.sessions.events.with_raw_response.get(
                 event_id="eventId",
                 provider="github",
                 org="",
@@ -76,7 +76,7 @@ class TestEvents:
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `repo` but received ''"):
-            client.repos.sessions.events.with_raw_response.retrieve(
+            client.repos.sessions.events.with_raw_response.get(
                 event_id="eventId",
                 provider="github",
                 org="org",
@@ -85,7 +85,7 @@ class TestEvents:
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
-            client.repos.sessions.events.with_raw_response.retrieve(
+            client.repos.sessions.events.with_raw_response.get(
                 event_id="eventId",
                 provider="github",
                 org="org",
@@ -94,7 +94,7 @@ class TestEvents:
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `event_id` but received ''"):
-            client.repos.sessions.events.with_raw_response.retrieve(
+            client.repos.sessions.events.with_raw_response.get(
                 event_id="",
                 provider="github",
                 org="org",
@@ -284,8 +284,8 @@ class TestAsyncEvents:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncSolver) -> None:
-        event = await async_client.repos.sessions.events.retrieve(
+    async def test_method_get(self, async_client: AsyncSolver) -> None:
+        event = await async_client.repos.sessions.events.get(
             event_id="eventId",
             provider="github",
             org="org",
@@ -296,8 +296,8 @@ class TestAsyncEvents:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncSolver) -> None:
-        response = await async_client.repos.sessions.events.with_raw_response.retrieve(
+    async def test_raw_response_get(self, async_client: AsyncSolver) -> None:
+        response = await async_client.repos.sessions.events.with_raw_response.get(
             event_id="eventId",
             provider="github",
             org="org",
@@ -312,8 +312,8 @@ class TestAsyncEvents:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncSolver) -> None:
-        async with async_client.repos.sessions.events.with_streaming_response.retrieve(
+    async def test_streaming_response_get(self, async_client: AsyncSolver) -> None:
+        async with async_client.repos.sessions.events.with_streaming_response.get(
             event_id="eventId",
             provider="github",
             org="org",
@@ -330,9 +330,9 @@ class TestAsyncEvents:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncSolver) -> None:
+    async def test_path_params_get(self, async_client: AsyncSolver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
-            await async_client.repos.sessions.events.with_raw_response.retrieve(
+            await async_client.repos.sessions.events.with_raw_response.get(
                 event_id="eventId",
                 provider="github",
                 org="",
@@ -341,7 +341,7 @@ class TestAsyncEvents:
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `repo` but received ''"):
-            await async_client.repos.sessions.events.with_raw_response.retrieve(
+            await async_client.repos.sessions.events.with_raw_response.get(
                 event_id="eventId",
                 provider="github",
                 org="org",
@@ -350,7 +350,7 @@ class TestAsyncEvents:
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
-            await async_client.repos.sessions.events.with_raw_response.retrieve(
+            await async_client.repos.sessions.events.with_raw_response.get(
                 event_id="eventId",
                 provider="github",
                 org="org",
@@ -359,7 +359,7 @@ class TestAsyncEvents:
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `event_id` but received ''"):
-            await async_client.repos.sessions.events.with_raw_response.retrieve(
+            await async_client.repos.sessions.events.with_raw_response.get(
                 event_id="",
                 provider="github",
                 org="org",

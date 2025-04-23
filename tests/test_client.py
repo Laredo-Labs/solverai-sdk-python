@@ -338,7 +338,7 @@ class TestSolver:
         assert request.headers.get("Authorization") == api_key
 
         with pytest.raises(SolverError):
-            with update_env(**{"SOLVER_API_API_KEY": Omit()}):
+            with update_env(**{"SOLVER_API_KEY": Omit()}):
                 client2 = Solver(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
@@ -1094,7 +1094,7 @@ class TestAsyncSolver:
         assert request.headers.get("Authorization") == api_key
 
         with pytest.raises(SolverError):
-            with update_env(**{"SOLVER_API_API_KEY": Omit()}):
+            with update_env(**{"SOLVER_API_KEY": Omit()}):
                 client2 = AsyncSolver(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 

@@ -55,49 +55,6 @@ class TurnsResource(SyncAPIResource):
         """
         return TurnsResourceWithStreamingResponse(self)
 
-    def retrieve(
-        self,
-        turn_id: str,
-        *,
-        provider: VcsProvider,
-        org: str,
-        repo: str,
-        session_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Turn:
-        """
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not provider:
-            raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
-        if not org:
-            raise ValueError(f"Expected a non-empty value for `org` but received {org!r}")
-        if not repo:
-            raise ValueError(f"Expected a non-empty value for `repo` but received {repo!r}")
-        if not session_id:
-            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
-        if not turn_id:
-            raise ValueError(f"Expected a non-empty value for `turn_id` but received {turn_id!r}")
-        return self._get(
-            f"/repos/{provider}/{org}/{repo}/sessions/{session_id}/turns/{turn_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=Turn,
-        )
-
     def list(
         self,
         session_id: str,
@@ -181,6 +138,49 @@ class TurnsResource(SyncAPIResource):
             cast_to=Turn,
         )
 
+    def get(
+        self,
+        turn_id: str,
+        *,
+        provider: VcsProvider,
+        org: str,
+        repo: str,
+        session_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Turn:
+        """
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not provider:
+            raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
+        if not org:
+            raise ValueError(f"Expected a non-empty value for `org` but received {org!r}")
+        if not repo:
+            raise ValueError(f"Expected a non-empty value for `repo` but received {repo!r}")
+        if not session_id:
+            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
+        if not turn_id:
+            raise ValueError(f"Expected a non-empty value for `turn_id` but received {turn_id!r}")
+        return self._get(
+            f"/repos/{provider}/{org}/{repo}/sessions/{session_id}/turns/{turn_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Turn,
+        )
+
     def patch(
         self,
         turn_id: str,
@@ -248,49 +248,6 @@ class AsyncTurnsResource(AsyncAPIResource):
         For more information, see https://www.github.com/stainless-sdks/solver-api-python#with_streaming_response
         """
         return AsyncTurnsResourceWithStreamingResponse(self)
-
-    async def retrieve(
-        self,
-        turn_id: str,
-        *,
-        provider: VcsProvider,
-        org: str,
-        repo: str,
-        session_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Turn:
-        """
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not provider:
-            raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
-        if not org:
-            raise ValueError(f"Expected a non-empty value for `org` but received {org!r}")
-        if not repo:
-            raise ValueError(f"Expected a non-empty value for `repo` but received {repo!r}")
-        if not session_id:
-            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
-        if not turn_id:
-            raise ValueError(f"Expected a non-empty value for `turn_id` but received {turn_id!r}")
-        return await self._get(
-            f"/repos/{provider}/{org}/{repo}/sessions/{session_id}/turns/{turn_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=Turn,
-        )
 
     async def list(
         self,
@@ -375,6 +332,49 @@ class AsyncTurnsResource(AsyncAPIResource):
             cast_to=Turn,
         )
 
+    async def get(
+        self,
+        turn_id: str,
+        *,
+        provider: VcsProvider,
+        org: str,
+        repo: str,
+        session_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Turn:
+        """
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not provider:
+            raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
+        if not org:
+            raise ValueError(f"Expected a non-empty value for `org` but received {org!r}")
+        if not repo:
+            raise ValueError(f"Expected a non-empty value for `repo` but received {repo!r}")
+        if not session_id:
+            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
+        if not turn_id:
+            raise ValueError(f"Expected a non-empty value for `turn_id` but received {turn_id!r}")
+        return await self._get(
+            f"/repos/{provider}/{org}/{repo}/sessions/{session_id}/turns/{turn_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Turn,
+        )
+
     async def patch(
         self,
         turn_id: str,
@@ -423,14 +423,14 @@ class TurnsResourceWithRawResponse:
     def __init__(self, turns: TurnsResource) -> None:
         self._turns = turns
 
-        self.retrieve = to_raw_response_wrapper(
-            turns.retrieve,
-        )
         self.list = to_raw_response_wrapper(
             turns.list,
         )
         self.cancel = to_raw_response_wrapper(
             turns.cancel,
+        )
+        self.get = to_raw_response_wrapper(
+            turns.get,
         )
         self.patch = to_raw_response_wrapper(
             turns.patch,
@@ -445,14 +445,14 @@ class AsyncTurnsResourceWithRawResponse:
     def __init__(self, turns: AsyncTurnsResource) -> None:
         self._turns = turns
 
-        self.retrieve = async_to_raw_response_wrapper(
-            turns.retrieve,
-        )
         self.list = async_to_raw_response_wrapper(
             turns.list,
         )
         self.cancel = async_to_raw_response_wrapper(
             turns.cancel,
+        )
+        self.get = async_to_raw_response_wrapper(
+            turns.get,
         )
         self.patch = async_to_raw_response_wrapper(
             turns.patch,
@@ -467,14 +467,14 @@ class TurnsResourceWithStreamingResponse:
     def __init__(self, turns: TurnsResource) -> None:
         self._turns = turns
 
-        self.retrieve = to_streamed_response_wrapper(
-            turns.retrieve,
-        )
         self.list = to_streamed_response_wrapper(
             turns.list,
         )
         self.cancel = to_streamed_response_wrapper(
             turns.cancel,
+        )
+        self.get = to_streamed_response_wrapper(
+            turns.get,
         )
         self.patch = to_streamed_response_wrapper(
             turns.patch,
@@ -489,14 +489,14 @@ class AsyncTurnsResourceWithStreamingResponse:
     def __init__(self, turns: AsyncTurnsResource) -> None:
         self._turns = turns
 
-        self.retrieve = async_to_streamed_response_wrapper(
-            turns.retrieve,
-        )
         self.list = async_to_streamed_response_wrapper(
             turns.list,
         )
         self.cancel = async_to_streamed_response_wrapper(
             turns.cancel,
+        )
+        self.get = async_to_streamed_response_wrapper(
+            turns.get,
         )
         self.patch = async_to_streamed_response_wrapper(
             turns.patch,

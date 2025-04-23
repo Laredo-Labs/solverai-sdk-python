@@ -100,76 +100,6 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_retrieve(self, client: Solver) -> None:
-        session = client.repos.sessions.retrieve(
-            session_id="sessionId",
-            provider="github",
-            org="org",
-            repo="repo",
-        )
-        assert_matches_type(Session, session, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_retrieve(self, client: Solver) -> None:
-        response = client.repos.sessions.with_raw_response.retrieve(
-            session_id="sessionId",
-            provider="github",
-            org="org",
-            repo="repo",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        session = response.parse()
-        assert_matches_type(Session, session, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_retrieve(self, client: Solver) -> None:
-        with client.repos.sessions.with_streaming_response.retrieve(
-            session_id="sessionId",
-            provider="github",
-            org="org",
-            repo="repo",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            session = response.parse()
-            assert_matches_type(Session, session, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_path_params_retrieve(self, client: Solver) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
-            client.repos.sessions.with_raw_response.retrieve(
-                session_id="sessionId",
-                provider="github",
-                org="",
-                repo="repo",
-            )
-
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `repo` but received ''"):
-            client.repos.sessions.with_raw_response.retrieve(
-                session_id="sessionId",
-                provider="github",
-                org="org",
-                repo="",
-            )
-
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
-            client.repos.sessions.with_raw_response.retrieve(
-                session_id="",
-                provider="github",
-                org="org",
-                repo="repo",
-            )
-
-    @pytest.mark.skip()
-    @parametrize
     def test_method_list(self, client: Solver) -> None:
         session = client.repos.sessions.list(
             repo="repo",
@@ -240,6 +170,76 @@ class TestSessions:
                 repo="",
                 provider="github",
                 org="org",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_get(self, client: Solver) -> None:
+        session = client.repos.sessions.get(
+            session_id="sessionId",
+            provider="github",
+            org="org",
+            repo="repo",
+        )
+        assert_matches_type(Session, session, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_get(self, client: Solver) -> None:
+        response = client.repos.sessions.with_raw_response.get(
+            session_id="sessionId",
+            provider="github",
+            org="org",
+            repo="repo",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        session = response.parse()
+        assert_matches_type(Session, session, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_get(self, client: Solver) -> None:
+        with client.repos.sessions.with_streaming_response.get(
+            session_id="sessionId",
+            provider="github",
+            org="org",
+            repo="repo",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            session = response.parse()
+            assert_matches_type(Session, session, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_get(self, client: Solver) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
+            client.repos.sessions.with_raw_response.get(
+                session_id="sessionId",
+                provider="github",
+                org="",
+                repo="repo",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `repo` but received ''"):
+            client.repos.sessions.with_raw_response.get(
+                session_id="sessionId",
+                provider="github",
+                org="org",
+                repo="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
+            client.repos.sessions.with_raw_response.get(
+                session_id="",
+                provider="github",
+                org="org",
+                repo="repo",
             )
 
     @pytest.mark.skip()
@@ -503,76 +503,6 @@ class TestAsyncSessions:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncSolver) -> None:
-        session = await async_client.repos.sessions.retrieve(
-            session_id="sessionId",
-            provider="github",
-            org="org",
-            repo="repo",
-        )
-        assert_matches_type(Session, session, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncSolver) -> None:
-        response = await async_client.repos.sessions.with_raw_response.retrieve(
-            session_id="sessionId",
-            provider="github",
-            org="org",
-            repo="repo",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        session = await response.parse()
-        assert_matches_type(Session, session, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncSolver) -> None:
-        async with async_client.repos.sessions.with_streaming_response.retrieve(
-            session_id="sessionId",
-            provider="github",
-            org="org",
-            repo="repo",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            session = await response.parse()
-            assert_matches_type(Session, session, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncSolver) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
-            await async_client.repos.sessions.with_raw_response.retrieve(
-                session_id="sessionId",
-                provider="github",
-                org="",
-                repo="repo",
-            )
-
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `repo` but received ''"):
-            await async_client.repos.sessions.with_raw_response.retrieve(
-                session_id="sessionId",
-                provider="github",
-                org="org",
-                repo="",
-            )
-
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
-            await async_client.repos.sessions.with_raw_response.retrieve(
-                session_id="",
-                provider="github",
-                org="org",
-                repo="repo",
-            )
-
-    @pytest.mark.skip()
-    @parametrize
     async def test_method_list(self, async_client: AsyncSolver) -> None:
         session = await async_client.repos.sessions.list(
             repo="repo",
@@ -643,6 +573,76 @@ class TestAsyncSessions:
                 repo="",
                 provider="github",
                 org="org",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_get(self, async_client: AsyncSolver) -> None:
+        session = await async_client.repos.sessions.get(
+            session_id="sessionId",
+            provider="github",
+            org="org",
+            repo="repo",
+        )
+        assert_matches_type(Session, session, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_get(self, async_client: AsyncSolver) -> None:
+        response = await async_client.repos.sessions.with_raw_response.get(
+            session_id="sessionId",
+            provider="github",
+            org="org",
+            repo="repo",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        session = await response.parse()
+        assert_matches_type(Session, session, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_get(self, async_client: AsyncSolver) -> None:
+        async with async_client.repos.sessions.with_streaming_response.get(
+            session_id="sessionId",
+            provider="github",
+            org="org",
+            repo="repo",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            session = await response.parse()
+            assert_matches_type(Session, session, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_get(self, async_client: AsyncSolver) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
+            await async_client.repos.sessions.with_raw_response.get(
+                session_id="sessionId",
+                provider="github",
+                org="",
+                repo="repo",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `repo` but received ''"):
+            await async_client.repos.sessions.with_raw_response.get(
+                session_id="sessionId",
+                provider="github",
+                org="org",
+                repo="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
+            await async_client.repos.sessions.with_raw_response.get(
+                session_id="",
+                provider="github",
+                org="org",
+                repo="repo",
             )
 
     @pytest.mark.skip()
