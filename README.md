@@ -31,17 +31,17 @@ import os
 from solver_api import Solver
 
 client = Solver(
-    api_key=os.environ.get("SOLVER_API_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("SOLVER_API_KEY"),  # This is the default and can be omitted
 )
 
 repos = client.repos.list(
-    "REPLACE_ME",
+    "github",
 )
 ```
 
 While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `SOLVER_API_API_KEY="My API Key"` to your `.env` file
+to add `SOLVER_API_KEY="My API Key"` to your `.env` file
 so that your API Key is not stored in source control.
 
 ## Async usage
@@ -54,13 +54,13 @@ import asyncio
 from solver_api import AsyncSolver
 
 client = AsyncSolver(
-    api_key=os.environ.get("SOLVER_API_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("SOLVER_API_KEY"),  # This is the default and can be omitted
 )
 
 
 async def main() -> None:
     repos = await client.repos.list(
-        "REPLACE_ME",
+        "github",
     )
 
 
@@ -95,7 +95,7 @@ client = Solver()
 
 try:
     client.repos.list(
-        "REPLACE_ME",
+        "github",
     )
 except solver_api.APIConnectionError as e:
     print("The server could not be reached")
@@ -140,7 +140,7 @@ client = Solver(
 
 # Or, configure per-request:
 client.with_options(max_retries=5).repos.list(
-    "REPLACE_ME",
+    "github",
 )
 ```
 
@@ -165,7 +165,7 @@ client = Solver(
 
 # Override per-request:
 client.with_options(timeout=5.0).repos.list(
-    "REPLACE_ME",
+    "github",
 )
 ```
 
@@ -208,7 +208,7 @@ from solver_api import Solver
 
 client = Solver()
 response = client.repos.with_raw_response.list(
-    "REPLACE_ME",
+    "github",
 )
 print(response.headers.get('X-My-Header'))
 
@@ -228,7 +228,7 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 
 ```python
 with client.repos.with_streaming_response.list(
-    "REPLACE_ME",
+    "github",
 ) as response:
     print(response.headers.get("X-My-Header"))
 

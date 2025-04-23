@@ -143,46 +143,6 @@ class SessionsResource(SyncAPIResource):
             cast_to=Session,
         )
 
-    def retrieve(
-        self,
-        session_id: str,
-        *,
-        provider: VcsProvider,
-        org: str,
-        repo: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Session:
-        """
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not provider:
-            raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
-        if not org:
-            raise ValueError(f"Expected a non-empty value for `org` but received {org!r}")
-        if not repo:
-            raise ValueError(f"Expected a non-empty value for `repo` but received {repo!r}")
-        if not session_id:
-            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
-        return self._get(
-            f"/repos/{provider}/{org}/{repo}/sessions/{session_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=Session,
-        )
-
     def list(
         self,
         repo: str,
@@ -240,6 +200,46 @@ class SessionsResource(SyncAPIResource):
                 ),
             ),
             cast_to=SessionListResponse,
+        )
+
+    def get(
+        self,
+        session_id: str,
+        *,
+        provider: VcsProvider,
+        org: str,
+        repo: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Session:
+        """
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not provider:
+            raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
+        if not org:
+            raise ValueError(f"Expected a non-empty value for `org` but received {org!r}")
+        if not repo:
+            raise ValueError(f"Expected a non-empty value for `repo` but received {repo!r}")
+        if not session_id:
+            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
+        return self._get(
+            f"/repos/{provider}/{org}/{repo}/sessions/{session_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Session,
         )
 
     def patch(
@@ -430,46 +430,6 @@ class AsyncSessionsResource(AsyncAPIResource):
             cast_to=Session,
         )
 
-    async def retrieve(
-        self,
-        session_id: str,
-        *,
-        provider: VcsProvider,
-        org: str,
-        repo: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Session:
-        """
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not provider:
-            raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
-        if not org:
-            raise ValueError(f"Expected a non-empty value for `org` but received {org!r}")
-        if not repo:
-            raise ValueError(f"Expected a non-empty value for `repo` but received {repo!r}")
-        if not session_id:
-            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
-        return await self._get(
-            f"/repos/{provider}/{org}/{repo}/sessions/{session_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=Session,
-        )
-
     async def list(
         self,
         repo: str,
@@ -527,6 +487,46 @@ class AsyncSessionsResource(AsyncAPIResource):
                 ),
             ),
             cast_to=SessionListResponse,
+        )
+
+    async def get(
+        self,
+        session_id: str,
+        *,
+        provider: VcsProvider,
+        org: str,
+        repo: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Session:
+        """
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not provider:
+            raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
+        if not org:
+            raise ValueError(f"Expected a non-empty value for `org` but received {org!r}")
+        if not repo:
+            raise ValueError(f"Expected a non-empty value for `repo` but received {repo!r}")
+        if not session_id:
+            raise ValueError(f"Expected a non-empty value for `session_id` but received {session_id!r}")
+        return await self._get(
+            f"/repos/{provider}/{org}/{repo}/sessions/{session_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Session,
         )
 
     async def patch(
@@ -642,11 +642,11 @@ class SessionsResourceWithRawResponse:
         self.create = to_raw_response_wrapper(
             sessions.create,
         )
-        self.retrieve = to_raw_response_wrapper(
-            sessions.retrieve,
-        )
         self.list = to_raw_response_wrapper(
             sessions.list,
+        )
+        self.get = to_raw_response_wrapper(
+            sessions.get,
         )
         self.patch = to_raw_response_wrapper(
             sessions.patch,
@@ -675,11 +675,11 @@ class AsyncSessionsResourceWithRawResponse:
         self.create = async_to_raw_response_wrapper(
             sessions.create,
         )
-        self.retrieve = async_to_raw_response_wrapper(
-            sessions.retrieve,
-        )
         self.list = async_to_raw_response_wrapper(
             sessions.list,
+        )
+        self.get = async_to_raw_response_wrapper(
+            sessions.get,
         )
         self.patch = async_to_raw_response_wrapper(
             sessions.patch,
@@ -708,11 +708,11 @@ class SessionsResourceWithStreamingResponse:
         self.create = to_streamed_response_wrapper(
             sessions.create,
         )
-        self.retrieve = to_streamed_response_wrapper(
-            sessions.retrieve,
-        )
         self.list = to_streamed_response_wrapper(
             sessions.list,
+        )
+        self.get = to_streamed_response_wrapper(
+            sessions.get,
         )
         self.patch = to_streamed_response_wrapper(
             sessions.patch,
@@ -741,11 +741,11 @@ class AsyncSessionsResourceWithStreamingResponse:
         self.create = async_to_streamed_response_wrapper(
             sessions.create,
         )
-        self.retrieve = async_to_streamed_response_wrapper(
-            sessions.retrieve,
-        )
         self.list = async_to_streamed_response_wrapper(
             sessions.list,
+        )
+        self.get = async_to_streamed_response_wrapper(
+            sessions.get,
         )
         self.patch = async_to_streamed_response_wrapper(
             sessions.patch,
