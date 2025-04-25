@@ -3,4 +3,4 @@
 from __future__ import annotations
 
 from .vcs_provider import VcsProvider as VcsProvider
-from .repo_retrieve_response import RepoRetrieveResponse as RepoRetrieveResponse
+from .repo_list_response import RepoListResponse as RepoListResponse

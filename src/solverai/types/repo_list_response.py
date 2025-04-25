@@ -5,13 +5,13 @@ from typing_extensions import TypeAlias
 
 from .._models import BaseModel
 
-__all__ = ["RepoRetrieveResponse", "RepoRetrieveResponseItem"]
+__all__ = ["RepoListResponse", "RepoListResponseItem"]
 
 
-class RepoRetrieveResponseItem(BaseModel):
+class RepoListResponseItem(BaseModel):
     org: str
 
     repo: str
 
 
-RepoRetrieveResponse: TypeAlias = List[RepoRetrieveResponseItem]
+RepoListResponse: TypeAlias = List[RepoListResponseItem]

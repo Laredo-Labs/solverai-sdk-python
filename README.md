@@ -31,17 +31,21 @@ import os
 from solverai import Solver
 
 client = Solver(
-    api_key=os.environ.get("SOLVER_API_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("SOLVER_API_KEY"),  # This is the default and can be omitted
 )
 
-repos = client.repos.retrieve(
-    "REPLACE_ME",
+session = client.repos.sessions.create(
+    repo="solverai-sdk-python",
+    provider="github",
+    org="Laredo-Labs",
+    user_branch_name="main",
 )
+print(session.id)
 ```
 
 While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `SOLVER_API_API_KEY="My API Key"` to your `.env` file
+to add `SOLVER_API_KEY="My API Key"` to your `.env` file
 so that your API Key is not stored in source control.
 
 ## Async usage
@@ -54,14 +58,18 @@ import asyncio
 from solverai import AsyncSolver
 
 client = AsyncSolver(
-    api_key=os.environ.get("SOLVER_API_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("SOLVER_API_KEY"),  # This is the default and can be omitted
 )
 
 
 async def main() -> None:
-    repos = await client.repos.retrieve(
-        "REPLACE_ME",
+    session = await client.repos.sessions.create(
+        repo="solverai-sdk-python",
+        provider="github",
+        org="Laredo-Labs",
+        user_branch_name="main",
     )
+    print(session.id)
 
 
 asyncio.run(main())
@@ -94,8 +102,11 @@ from solverai import Solver
 client = Solver()
 
 try:
-    client.repos.retrieve(
-        "REPLACE_ME",
+    client.repos.sessions.create(
+        repo="solverai-sdk-python",
+        provider="github",
+        org="Laredo-Labs",
+        user_branch_name="main",
     )
 except solverai.APIConnectionError as e:
     print("The server could not be reached")
@@ -139,8 +150,11 @@ client = Solver(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).repos.retrieve(
-    "REPLACE_ME",
+client.with_options(max_retries=5).repos.sessions.create(
+    repo="solverai-sdk-python",
+    provider="github",
+    org="Laredo-Labs",
+    user_branch_name="main",
 )
 ```
 
@@ -164,8 +178,11 @@ client = Solver(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).repos.retrieve(
-    "REPLACE_ME",
+client.with_options(timeout=5.0).repos.sessions.create(
+    repo="solverai-sdk-python",
+    provider="github",
+    org="Laredo-Labs",
+    user_branch_name="main",
 )
 ```
 
@@ -207,13 +224,16 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from solverai import Solver
 
 client = Solver()
-response = client.repos.with_raw_response.retrieve(
-    "REPLACE_ME",
+response = client.repos.sessions.with_raw_response.create(
+    repo="solverai-sdk-python",
+    provider="github",
+    org="Laredo-Labs",
+    user_branch_name="main",
 )
 print(response.headers.get('X-My-Header'))
 
-repo = response.parse()  # get the object that `repos.retrieve()` would have returned
-print(repo)
+session = response.parse()  # get the object that `repos.sessions.create()` would have returned
+print(session.id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/stainless-sdks/solver-api-python/tree/main/src/solverai/_response.py) object.
@@ -227,8 +247,11 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.repos.with_streaming_response.retrieve(
-    "REPLACE_ME",
+with client.repos.sessions.with_streaming_response.create(
+    repo="solverai-sdk-python",
+    provider="github",
+    org="Laredo-Labs",
+    user_branch_name="main",
 ) as response:
     print(response.headers.get("X-My-Header"))
 

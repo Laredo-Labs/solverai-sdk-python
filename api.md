@@ -3,12 +3,12 @@
 Types:
 
 ```python
-from solverai.types import VcsProvider, RepoRetrieveResponse
+from solverai.types import VcsProvider, RepoListResponse
 ```
 
 Methods:
 
-- <code title="get /alpha/repos/{provider}">client.repos.<a href="./src/solverai/resources/repos/repos.py">retrieve</a>(provider) -> <a href="./src/solverai/types/repo_retrieve_response.py">RepoRetrieveResponse</a></code>
+- <code title="get /alpha/repos/{provider}">client.repos.<a href="./src/solverai/resources/repos/repos.py">list</a>(provider) -> <a href="./src/solverai/types/repo_list_response.py">RepoListResponse</a></code>
 
 ## Sessions
 

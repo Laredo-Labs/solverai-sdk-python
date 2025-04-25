@@ -24,7 +24,7 @@ from .sessions.sessions import (
     AsyncSessionsResourceWithStreamingResponse,
 )
 from ...types.vcs_provider import VcsProvider
-from ...types.repo_retrieve_response import RepoRetrieveResponse
+from ...types.repo_list_response import RepoListResponse
 
 __all__ = ["ReposResource", "AsyncReposResource"]
 
@@ -53,7 +53,7 @@ class ReposResource(SyncAPIResource):
         """
         return ReposResourceWithStreamingResponse(self)
 
-    def retrieve(
+    def list(
         self,
         provider: VcsProvider,
         *,
@@ -63,7 +63,7 @@ class ReposResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RepoRetrieveResponse:
+    ) -> RepoListResponse:
         """
         Args:
           extra_headers: Send extra headers
@@ -81,7 +81,7 @@ class ReposResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RepoRetrieveResponse,
+            cast_to=RepoListResponse,
         )
 
 
@@ -109,7 +109,7 @@ class AsyncReposResource(AsyncAPIResource):
         """
         return AsyncReposResourceWithStreamingResponse(self)
 
-    async def retrieve(
+    async def list(
         self,
         provider: VcsProvider,
         *,
@@ -119,7 +119,7 @@ class AsyncReposResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RepoRetrieveResponse:
+    ) -> RepoListResponse:
         """
         Args:
           extra_headers: Send extra headers
@@ -137,7 +137,7 @@ class AsyncReposResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RepoRetrieveResponse,
+            cast_to=RepoListResponse,
         )
 
 
@@ -145,8 +145,8 @@ class ReposResourceWithRawResponse:
     def __init__(self, repos: ReposResource) -> None:
         self._repos = repos
 
-        self.retrieve = to_raw_response_wrapper(
-            repos.retrieve,
+        self.list = to_raw_response_wrapper(
+            repos.list,
         )
 
     @cached_property
@@ -158,8 +158,8 @@ class AsyncReposResourceWithRawResponse:
     def __init__(self, repos: AsyncReposResource) -> None:
         self._repos = repos
 
-        self.retrieve = async_to_raw_response_wrapper(
-            repos.retrieve,
+        self.list = async_to_raw_response_wrapper(
+            repos.list,
         )
 
     @cached_property
@@ -171,8 +171,8 @@ class ReposResourceWithStreamingResponse:
     def __init__(self, repos: ReposResource) -> None:
         self._repos = repos
 
-        self.retrieve = to_streamed_response_wrapper(
-            repos.retrieve,
+        self.list = to_streamed_response_wrapper(
+            repos.list,
         )
 
     @cached_property
@@ -184,8 +184,8 @@ class AsyncReposResourceWithStreamingResponse:
     def __init__(self, repos: AsyncReposResource) -> None:
         self._repos = repos
 
-        self.retrieve = async_to_streamed_response_wrapper(
-            repos.retrieve,
+        self.list = async_to_streamed_response_wrapper(
+            repos.list,
         )
 
     @cached_property
