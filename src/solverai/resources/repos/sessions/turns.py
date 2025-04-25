@@ -4,21 +4,21 @@ from __future__ import annotations
 
 import httpx
 
-from .....types import VcsProvider
-from ....._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ....._compat import cached_property
-from ....._resource import SyncAPIResource, AsyncAPIResource
-from ....._response import (
+from ....types import VcsProvider
+from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ...._compat import cached_property
+from ...._resource import SyncAPIResource, AsyncAPIResource
+from ...._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ....._base_client import make_request_options
-from .....types.repos.turn import Turn
-from .....types.vcs_provider import VcsProvider
-from .....types.repos.sessions.turn_list_response import TurnListResponse
-from .....types.repos.sessions.turn_get_patch_response import TurnGetPatchResponse
+from ...._base_client import make_request_options
+from ....types.repos.turn import Turn
+from ....types.vcs_provider import VcsProvider
+from ....types.repos.sessions.turn_list_response import TurnListResponse
+from ....types.repos.sessions.turn_get_patch_response import TurnGetPatchResponse
 
 __all__ = ["TurnsResource", "AsyncTurnsResource"]
 
