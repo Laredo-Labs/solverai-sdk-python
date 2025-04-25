@@ -8,22 +8,8 @@ from .turns import (
     TurnsResourceWithStreamingResponse,
     AsyncTurnsResourceWithStreamingResponse,
 )
-from .events import (
-    EventsResource,
-    AsyncEventsResource,
-    EventsResourceWithRawResponse,
-    AsyncEventsResourceWithRawResponse,
-    EventsResourceWithStreamingResponse,
-    AsyncEventsResourceWithStreamingResponse,
-)
 
 __all__ = [
-    "EventsResource",
-    "AsyncEventsResource",
-    "EventsResourceWithRawResponse",
-    "AsyncEventsResourceWithRawResponse",
-    "EventsResourceWithStreamingResponse",
-    "AsyncEventsResourceWithStreamingResponse",
     "TurnsResource",
     "AsyncTurnsResource",
     "TurnsResourceWithRawResponse",

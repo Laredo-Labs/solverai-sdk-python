@@ -4,14 +4,6 @@ from __future__ import annotations
 
 import httpx
 
-from .events import (
-    EventsResource,
-    AsyncEventsResource,
-    EventsResourceWithRawResponse,
-    AsyncEventsResourceWithRawResponse,
-    EventsResourceWithStreamingResponse,
-    AsyncEventsResourceWithStreamingResponse,
-)
 from .....types import VcsProvider
 from ....._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ....._compat import cached_property
@@ -32,10 +24,6 @@ __all__ = ["TurnsResource", "AsyncTurnsResource"]
 
 
 class TurnsResource(SyncAPIResource):
-    @cached_property
-    def events(self) -> EventsResource:
-        return EventsResource(self._client)
-
     @cached_property
     def with_raw_response(self) -> TurnsResourceWithRawResponse:
         """
@@ -226,10 +214,6 @@ class TurnsResource(SyncAPIResource):
 
 
 class AsyncTurnsResource(AsyncAPIResource):
-    @cached_property
-    def events(self) -> AsyncEventsResource:
-        return AsyncEventsResource(self._client)
-
     @cached_property
     def with_raw_response(self) -> AsyncTurnsResourceWithRawResponse:
         """
@@ -436,10 +420,6 @@ class TurnsResourceWithRawResponse:
             turns.get_patch,
         )
 
-    @cached_property
-    def events(self) -> EventsResourceWithRawResponse:
-        return EventsResourceWithRawResponse(self._turns.events)
-
 
 class AsyncTurnsResourceWithRawResponse:
     def __init__(self, turns: AsyncTurnsResource) -> None:
@@ -457,10 +437,6 @@ class AsyncTurnsResourceWithRawResponse:
         self.get_patch = async_to_raw_response_wrapper(
             turns.get_patch,
         )
-
-    @cached_property
-    def events(self) -> AsyncEventsResourceWithRawResponse:
-        return AsyncEventsResourceWithRawResponse(self._turns.events)
 
 
 class TurnsResourceWithStreamingResponse:
@@ -480,10 +456,6 @@ class TurnsResourceWithStreamingResponse:
             turns.get_patch,
         )
 
-    @cached_property
-    def events(self) -> EventsResourceWithStreamingResponse:
-        return EventsResourceWithStreamingResponse(self._turns.events)
-
 
 class AsyncTurnsResourceWithStreamingResponse:
     def __init__(self, turns: AsyncTurnsResource) -> None:
@@ -501,7 +473,3 @@ class AsyncTurnsResourceWithStreamingResponse:
         self.get_patch = async_to_streamed_response_wrapper(
             turns.get_patch,
         )
-
-    @cached_property
-    def events(self) -> AsyncEventsResourceWithStreamingResponse:
-        return AsyncEventsResourceWithStreamingResponse(self._turns.events)
