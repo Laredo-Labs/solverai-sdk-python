@@ -60,12 +60,6 @@ Methods:
 - <code title="get /alpha/repos/{provider}/{org}/{repo}/sessions/{sessionId}/turns/{turnId}">client.repos.sessions.turns.<a href="./src/solverai/resources/repos/sessions/turns/turns.py">get</a>(turn_id, \*, provider, org, repo, session_id) -> <a href="./src/solverai/types/repos/turn.py">Turn</a></code>
 - <code title="get /alpha/repos/{provider}/{org}/{repo}/sessions/{sessionId}/turns/{turnId}/patch">client.repos.sessions.turns.<a href="./src/solverai/resources/repos/sessions/turns/turns.py">get_patch</a>(turn_id, \*, provider, org, repo, session_id) -> <a href="./src/solverai/types/repos/sessions/turn_get_patch_response.py">TurnGetPatchResponse</a></code>
 
-#### Events
-
-Methods:
-
-- <code title="get /alpha/repos/{provider}/{org}/{repo}/sessions/{sessionId}/turns/{turnId}/events/stream">client.repos.sessions.turns.events.<a href="./src/solverai/resources/repos/sessions/turns/events.py">stream</a>(turn_id, \*, provider, org, repo, session_id) -> <a href="./src/solverai/types/repos/sessions/trace_event.py">TraceEvent</a></code>
-
 ### Events
 
 Types:
@@ -78,4 +72,3 @@ Methods:
 
 - <code title="get /alpha/repos/{provider}/{org}/{repo}/sessions/{sessionId}/events/{eventId}">client.repos.sessions.events.<a href="./src/solverai/resources/repos/sessions/events.py">get</a>(event_id, \*, provider, org, repo, session_id) -> <a href="./src/solverai/types/repos/sessions/trace_event.py">TraceEvent</a></code>
 - <code title="get /alpha/repos/{provider}/{org}/{repo}/sessions/{sessionId}/events/{eventId}/patch">client.repos.sessions.events.<a href="./src/solverai/resources/repos/sessions/events.py">get_patch</a>(event_id, \*, provider, org, repo, session_id, \*\*<a href="src/solverai/types/repos/sessions/event_get_patch_params.py">params</a>) -> <a href="./src/solverai/types/repos/sessions/event_get_patch_response.py">EventGetPatchResponse</a></code>
-- <code title="get /alpha/repos/{provider}/{org}/{repo}/sessions/{sessionId}/events/stream">client.repos.sessions.events.<a href="./src/solverai/resources/repos/sessions/events.py">stream</a>(session_id, \*, provider, org, repo) -> <a href="./src/solverai/types/repos/sessions/trace_event.py">TraceEvent</a></code>

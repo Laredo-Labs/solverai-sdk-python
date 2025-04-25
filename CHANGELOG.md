@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-alpha.2 (2025-04-25)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/Laredo-Labs/solverai-sdk-python/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+
+### Features
+
+* **api:** api update ([4115e3f](https://github.com/Laredo-Labs/solverai-sdk-python/commit/4115e3f2a2d8978b203e6a92f734df4303883f25))
+* **api:** api update ([49ac631](https://github.com/Laredo-Labs/solverai-sdk-python/commit/49ac6314404d014dcc427e916d99e78a67ef5824))
+
+
+### Documentation
+
+* **api:** fix docs link, update support contact ([bf540c3](https://github.com/Laredo-Labs/solverai-sdk-python/commit/bf540c33f6077c86047e806ded46e9655cd8457a))
+
 ## 0.1.0-alpha.1 (2025-04-25)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/Laredo-Labs/solverai-sdk-python/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)

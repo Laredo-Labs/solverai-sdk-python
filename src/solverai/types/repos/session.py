@@ -28,6 +28,8 @@ class Session(BaseModel):
 
     repo: str
 
+    solver_url: str = FieldInfo(alias="solverUrl")
+
     status: SessionStatus
 
     title: str

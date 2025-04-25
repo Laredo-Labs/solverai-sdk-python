@@ -4,4 +4,4 @@ from typing_extensions import Literal, TypeAlias
 
 __all__ = ["VcsProvider"]
 
-VcsProvider: TypeAlias = Literal["github", "gitlab"]
+VcsProvider: TypeAlias = Literal["github"]
