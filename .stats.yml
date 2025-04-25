@@ -1,4 +1,4 @@
 configured_endpoints: 15
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/solver-ai%2Fsolver-api-30a94cd12d5edc9db3d0fb471d522d687c4949b4c9cc1bdf1b1f062d6a329969.yml
-openapi_spec_hash: d884b89ee925c4112c75e88e65acc65a
-config_hash: 493345ae4f85f393fa5d9a79bd6487d2
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/solver-ai%2Fsolver-api-408c34dbecbdc0cedeeb15fe065582a1497991bc585000afe25bf2d62b8d663a.yml
+openapi_spec_hash: f6806cce3b0e7dc1855a4ac92a71c2dd
+config_hash: 6e10df46282290e5c60c88af338a6d76

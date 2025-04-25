@@ -5,8 +5,8 @@ from typing import Iterator, AsyncIterator
 import httpx
 import pytest
 
-from solver_api import Solver, AsyncSolver
-from solver_api._streaming import Stream, AsyncStream, ServerSentEvent
+from solverai import Solver, AsyncSolver
+from solverai._streaming import Stream, AsyncStream, ServerSentEvent
 
 
 @pytest.mark.asyncio

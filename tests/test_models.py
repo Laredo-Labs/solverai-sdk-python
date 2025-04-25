@@ -7,9 +7,9 @@ import pytest
 import pydantic
 from pydantic import Field
 
-from solver_api._utils import PropertyInfo
-from solver_api._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
-from solver_api._models import BaseModel, construct_type
+from solverai._utils import PropertyInfo
+from solverai._compat import PYDANTIC_V2, parse_obj, model_dump, model_json
+from solverai._models import BaseModel, construct_type
 
 
 class BasicModel(BaseModel):

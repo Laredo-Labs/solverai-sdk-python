@@ -7,10 +7,10 @@ from typing import Any, cast
 
 import pytest
 
-from solver_api import Solver, AsyncSolver
+from solverai import Solver, AsyncSolver
 from tests.utils import assert_matches_type
-from solver_api.types.repos import Turn
-from solver_api.types.repos.sessions import TurnListResponse, TurnPatchResponse
+from solverai.types.repos import Turn
+from solverai.types.repos.sessions import TurnListResponse, TurnGetPatchResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -260,20 +260,20 @@ class TestTurns:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_patch(self, client: Solver) -> None:
-        turn = client.repos.sessions.turns.patch(
+    def test_method_get_patch(self, client: Solver) -> None:
+        turn = client.repos.sessions.turns.get_patch(
             turn_id="turnId",
             provider="github",
             org="org",
             repo="repo",
             session_id="sessionId",
         )
-        assert_matches_type(TurnPatchResponse, turn, path=["response"])
+        assert_matches_type(TurnGetPatchResponse, turn, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_patch(self, client: Solver) -> None:
-        response = client.repos.sessions.turns.with_raw_response.patch(
+    def test_raw_response_get_patch(self, client: Solver) -> None:
+        response = client.repos.sessions.turns.with_raw_response.get_patch(
             turn_id="turnId",
             provider="github",
             org="org",
@@ -284,12 +284,12 @@ class TestTurns:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         turn = response.parse()
-        assert_matches_type(TurnPatchResponse, turn, path=["response"])
+        assert_matches_type(TurnGetPatchResponse, turn, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_patch(self, client: Solver) -> None:
-        with client.repos.sessions.turns.with_streaming_response.patch(
+    def test_streaming_response_get_patch(self, client: Solver) -> None:
+        with client.repos.sessions.turns.with_streaming_response.get_patch(
             turn_id="turnId",
             provider="github",
             org="org",
@@ -300,15 +300,15 @@ class TestTurns:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             turn = response.parse()
-            assert_matches_type(TurnPatchResponse, turn, path=["response"])
+            assert_matches_type(TurnGetPatchResponse, turn, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
-    def test_path_params_patch(self, client: Solver) -> None:
+    def test_path_params_get_patch(self, client: Solver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
-            client.repos.sessions.turns.with_raw_response.patch(
+            client.repos.sessions.turns.with_raw_response.get_patch(
                 turn_id="turnId",
                 provider="github",
                 org="",
@@ -317,7 +317,7 @@ class TestTurns:
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `repo` but received ''"):
-            client.repos.sessions.turns.with_raw_response.patch(
+            client.repos.sessions.turns.with_raw_response.get_patch(
                 turn_id="turnId",
                 provider="github",
                 org="org",
@@ -326,7 +326,7 @@ class TestTurns:
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
-            client.repos.sessions.turns.with_raw_response.patch(
+            client.repos.sessions.turns.with_raw_response.get_patch(
                 turn_id="turnId",
                 provider="github",
                 org="org",
@@ -335,7 +335,7 @@ class TestTurns:
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `turn_id` but received ''"):
-            client.repos.sessions.turns.with_raw_response.patch(
+            client.repos.sessions.turns.with_raw_response.get_patch(
                 turn_id="",
                 provider="github",
                 org="org",
@@ -589,20 +589,20 @@ class TestAsyncTurns:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_patch(self, async_client: AsyncSolver) -> None:
-        turn = await async_client.repos.sessions.turns.patch(
+    async def test_method_get_patch(self, async_client: AsyncSolver) -> None:
+        turn = await async_client.repos.sessions.turns.get_patch(
             turn_id="turnId",
             provider="github",
             org="org",
             repo="repo",
             session_id="sessionId",
         )
-        assert_matches_type(TurnPatchResponse, turn, path=["response"])
+        assert_matches_type(TurnGetPatchResponse, turn, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_patch(self, async_client: AsyncSolver) -> None:
-        response = await async_client.repos.sessions.turns.with_raw_response.patch(
+    async def test_raw_response_get_patch(self, async_client: AsyncSolver) -> None:
+        response = await async_client.repos.sessions.turns.with_raw_response.get_patch(
             turn_id="turnId",
             provider="github",
             org="org",
@@ -613,12 +613,12 @@ class TestAsyncTurns:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         turn = await response.parse()
-        assert_matches_type(TurnPatchResponse, turn, path=["response"])
+        assert_matches_type(TurnGetPatchResponse, turn, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_patch(self, async_client: AsyncSolver) -> None:
-        async with async_client.repos.sessions.turns.with_streaming_response.patch(
+    async def test_streaming_response_get_patch(self, async_client: AsyncSolver) -> None:
+        async with async_client.repos.sessions.turns.with_streaming_response.get_patch(
             turn_id="turnId",
             provider="github",
             org="org",
@@ -629,15 +629,15 @@ class TestAsyncTurns:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             turn = await response.parse()
-            assert_matches_type(TurnPatchResponse, turn, path=["response"])
+            assert_matches_type(TurnGetPatchResponse, turn, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
-    async def test_path_params_patch(self, async_client: AsyncSolver) -> None:
+    async def test_path_params_get_patch(self, async_client: AsyncSolver) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
-            await async_client.repos.sessions.turns.with_raw_response.patch(
+            await async_client.repos.sessions.turns.with_raw_response.get_patch(
                 turn_id="turnId",
                 provider="github",
                 org="",
@@ -646,7 +646,7 @@ class TestAsyncTurns:
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `repo` but received ''"):
-            await async_client.repos.sessions.turns.with_raw_response.patch(
+            await async_client.repos.sessions.turns.with_raw_response.get_patch(
                 turn_id="turnId",
                 provider="github",
                 org="org",
@@ -655,7 +655,7 @@ class TestAsyncTurns:
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
-            await async_client.repos.sessions.turns.with_raw_response.patch(
+            await async_client.repos.sessions.turns.with_raw_response.get_patch(
                 turn_id="turnId",
                 provider="github",
                 org="org",
@@ -664,7 +664,7 @@ class TestAsyncTurns:
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `turn_id` but received ''"):
-            await async_client.repos.sessions.turns.with_raw_response.patch(
+            await async_client.repos.sessions.turns.with_raw_response.get_patch(
                 turn_id="",
                 provider="github",
                 org="org",
