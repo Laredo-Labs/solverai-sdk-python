@@ -7,6 +7,14 @@ from typing_extensions import Literal
 
 import httpx
 
+from .turns import (
+    TurnsResource,
+    AsyncTurnsResource,
+    TurnsResourceWithRawResponse,
+    AsyncTurnsResourceWithRawResponse,
+    TurnsResourceWithStreamingResponse,
+    AsyncTurnsResourceWithStreamingResponse,
+)
 from .events import (
     EventsResource,
     AsyncEventsResource,
@@ -27,14 +35,6 @@ from ....types import VcsProvider
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
-from .turns.turns import (
-    TurnsResource,
-    AsyncTurnsResource,
-    TurnsResourceWithRawResponse,
-    AsyncTurnsResourceWithRawResponse,
-    TurnsResourceWithStreamingResponse,
-    AsyncTurnsResourceWithStreamingResponse,
-)
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
     to_raw_response_wrapper,
