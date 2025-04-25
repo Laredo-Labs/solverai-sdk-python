@@ -55,10 +55,10 @@ from solverai.types.repos.sessions import TurnListResponse, TurnGetPatchResponse
 
 Methods:
 
-- <code title="get /alpha/repos/{provider}/{org}/{repo}/sessions/{sessionId}/turns">client.repos.sessions.turns.<a href="./src/solverai/resources/repos/sessions/turns/turns.py">list</a>(session_id, \*, provider, org, repo) -> <a href="./src/solverai/types/repos/sessions/turn_list_response.py">TurnListResponse</a></code>
-- <code title="post /alpha/repos/{provider}/{org}/{repo}/sessions/{sessionId}/turns/{turnId}/cancel">client.repos.sessions.turns.<a href="./src/solverai/resources/repos/sessions/turns/turns.py">cancel</a>(turn_id, \*, provider, org, repo, session_id) -> <a href="./src/solverai/types/repos/turn.py">Turn</a></code>
-- <code title="get /alpha/repos/{provider}/{org}/{repo}/sessions/{sessionId}/turns/{turnId}">client.repos.sessions.turns.<a href="./src/solverai/resources/repos/sessions/turns/turns.py">get</a>(turn_id, \*, provider, org, repo, session_id) -> <a href="./src/solverai/types/repos/turn.py">Turn</a></code>
-- <code title="get /alpha/repos/{provider}/{org}/{repo}/sessions/{sessionId}/turns/{turnId}/patch">client.repos.sessions.turns.<a href="./src/solverai/resources/repos/sessions/turns/turns.py">get_patch</a>(turn_id, \*, provider, org, repo, session_id) -> <a href="./src/solverai/types/repos/sessions/turn_get_patch_response.py">TurnGetPatchResponse</a></code>
+- <code title="get /alpha/repos/{provider}/{org}/{repo}/sessions/{sessionId}/turns">client.repos.sessions.turns.<a href="./src/solverai/resources/repos/sessions/turns.py">list</a>(session_id, \*, provider, org, repo) -> <a href="./src/solverai/types/repos/sessions/turn_list_response.py">TurnListResponse</a></code>
+- <code title="post /alpha/repos/{provider}/{org}/{repo}/sessions/{sessionId}/turns/{turnId}/cancel">client.repos.sessions.turns.<a href="./src/solverai/resources/repos/sessions/turns.py">cancel</a>(turn_id, \*, provider, org, repo, session_id) -> <a href="./src/solverai/types/repos/turn.py">Turn</a></code>
+- <code title="get /alpha/repos/{provider}/{org}/{repo}/sessions/{sessionId}/turns/{turnId}">client.repos.sessions.turns.<a href="./src/solverai/resources/repos/sessions/turns.py">get</a>(turn_id, \*, provider, org, repo, session_id) -> <a href="./src/solverai/types/repos/turn.py">Turn</a></code>
+- <code title="get /alpha/repos/{provider}/{org}/{repo}/sessions/{sessionId}/turns/{turnId}/patch">client.repos.sessions.turns.<a href="./src/solverai/resources/repos/sessions/turns.py">get_patch</a>(turn_id, \*, provider, org, repo, session_id) -> <a href="./src/solverai/types/repos/sessions/turn_get_patch_response.py">TurnGetPatchResponse</a></code>
 
 ### Events
 

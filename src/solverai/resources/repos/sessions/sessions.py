@@ -2,11 +2,19 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union
+from typing import List
 from typing_extensions import Literal
 
 import httpx
 
+from .turns import (
+    TurnsResource,
+    AsyncTurnsResource,
+    TurnsResourceWithRawResponse,
+    AsyncTurnsResourceWithRawResponse,
+    TurnsResourceWithStreamingResponse,
+    AsyncTurnsResourceWithStreamingResponse,
+)
 from .events import (
     EventsResource,
     AsyncEventsResource,
@@ -27,14 +35,6 @@ from ....types import VcsProvider
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
-from .turns.turns import (
-    TurnsResource,
-    AsyncTurnsResource,
-    TurnsResourceWithRawResponse,
-    AsyncTurnsResourceWithRawResponse,
-    TurnsResourceWithStreamingResponse,
-    AsyncTurnsResourceWithStreamingResponse,
-)
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
     to_raw_response_wrapper,
@@ -302,8 +302,7 @@ class SessionsResource(SyncAPIResource):
         org: str,
         repo: str,
         instruction: str,
-        num_steps: int,
-        invocation_options: Dict[str, Union[str, bool, float]] | NotGiven = NOT_GIVEN,
+        num_steps: Literal[8, 16, 24, 32, 40],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -337,7 +336,6 @@ class SessionsResource(SyncAPIResource):
                 {
                     "instruction": instruction,
                     "num_steps": num_steps,
-                    "invocation_options": invocation_options,
                 },
                 session_solve_params.SessionSolveParams,
             ),
@@ -589,8 +587,7 @@ class AsyncSessionsResource(AsyncAPIResource):
         org: str,
         repo: str,
         instruction: str,
-        num_steps: int,
-        invocation_options: Dict[str, Union[str, bool, float]] | NotGiven = NOT_GIVEN,
+        num_steps: Literal[8, 16, 24, 32, 40],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -624,7 +621,6 @@ class AsyncSessionsResource(AsyncAPIResource):
                 {
                     "instruction": instruction,
                     "num_steps": num_steps,
-                    "invocation_options": invocation_options,
                 },
                 session_solve_params.SessionSolveParams,
             ),
