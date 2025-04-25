@@ -21,12 +21,12 @@ import pytest
 from respx import MockRouter
 from pydantic import ValidationError
 
-from solver_api import Solver, AsyncSolver, APIResponseValidationError
-from solver_api._types import Omit
-from solver_api._models import BaseModel, FinalRequestOptions
-from solver_api._constants import RAW_RESPONSE_HEADER
-from solver_api._exceptions import SolverError, APIStatusError, APITimeoutError, APIResponseValidationError
-from solver_api._base_client import (
+from solverai import Solver, AsyncSolver, APIResponseValidationError
+from solverai._types import Omit
+from solverai._models import BaseModel, FinalRequestOptions
+from solverai._constants import RAW_RESPONSE_HEADER
+from solverai._exceptions import SolverError, APIStatusError, APITimeoutError, APIResponseValidationError
+from solverai._base_client import (
     DEFAULT_TIMEOUT,
     HTTPX_DEFAULT_TIMEOUT,
     BaseClient,
@@ -230,10 +230,10 @@ class TestSolver:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "solver_api/_legacy_response.py",
-                        "solver_api/_response.py",
+                        "solverai/_legacy_response.py",
+                        "solverai/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "solver_api/_compat.py",
+                        "solverai/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -338,7 +338,7 @@ class TestSolver:
         assert request.headers.get("Authorization") == api_key
 
         with pytest.raises(SolverError):
-            with update_env(**{"SOLVER_API_KEY": Omit()}):
+            with update_env(**{"SOLVER_API_API_KEY": Omit()}):
                 client2 = Solver(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
@@ -707,32 +707,32 @@ class TestSolver:
         calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("solver_api._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("solverai._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/repos/github").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.get("/alpha/repos/github").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             self.client.get(
-                "/repos/github", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
+                "/alpha/repos/github", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
             )
 
         assert _get_open_connections(self.client) == 0
 
-    @mock.patch("solver_api._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("solverai._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/repos/github").mock(return_value=httpx.Response(500))
+        respx_mock.get("/alpha/repos/github").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             self.client.get(
-                "/repos/github", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
+                "/alpha/repos/github", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
             )
 
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("solver_api._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("solverai._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
     def test_retries_taken(
@@ -755,15 +755,15 @@ class TestSolver:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/repos/github").mock(side_effect=retry_handler)
+        respx_mock.get("/alpha/repos/github").mock(side_effect=retry_handler)
 
-        response = client.repos.with_raw_response.list("github")
+        response = client.repos.with_raw_response.retrieve("github")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("solver_api._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("solverai._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_omit_retry_count_header(
         self, client: Solver, failures_before_success: int, respx_mock: MockRouter
@@ -779,14 +779,14 @@ class TestSolver:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/repos/github").mock(side_effect=retry_handler)
+        respx_mock.get("/alpha/repos/github").mock(side_effect=retry_handler)
 
-        response = client.repos.with_raw_response.list("github", extra_headers={"x-stainless-retry-count": Omit()})
+        response = client.repos.with_raw_response.retrieve("github", extra_headers={"x-stainless-retry-count": Omit()})
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("solver_api._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("solverai._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_overwrite_retry_count_header(
         self, client: Solver, failures_before_success: int, respx_mock: MockRouter
@@ -802,9 +802,9 @@ class TestSolver:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/repos/github").mock(side_effect=retry_handler)
+        respx_mock.get("/alpha/repos/github").mock(side_effect=retry_handler)
 
-        response = client.repos.with_raw_response.list("github", extra_headers={"x-stainless-retry-count": "42"})
+        response = client.repos.with_raw_response.retrieve("github", extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
@@ -984,10 +984,10 @@ class TestAsyncSolver:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "solver_api/_legacy_response.py",
-                        "solver_api/_response.py",
+                        "solverai/_legacy_response.py",
+                        "solverai/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "solver_api/_compat.py",
+                        "solverai/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -1094,7 +1094,7 @@ class TestAsyncSolver:
         assert request.headers.get("Authorization") == api_key
 
         with pytest.raises(SolverError):
-            with update_env(**{"SOLVER_API_KEY": Omit()}):
+            with update_env(**{"SOLVER_API_API_KEY": Omit()}):
                 client2 = AsyncSolver(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
@@ -1477,32 +1477,32 @@ class TestAsyncSolver:
         calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("solver_api._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("solverai._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/repos/github").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.get("/alpha/repos/github").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             await self.client.get(
-                "/repos/github", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
+                "/alpha/repos/github", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
             )
 
         assert _get_open_connections(self.client) == 0
 
-    @mock.patch("solver_api._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("solverai._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/repos/github").mock(return_value=httpx.Response(500))
+        respx_mock.get("/alpha/repos/github").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             await self.client.get(
-                "/repos/github", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
+                "/alpha/repos/github", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
             )
 
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("solver_api._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("solverai._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
@@ -1526,15 +1526,15 @@ class TestAsyncSolver:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/repos/github").mock(side_effect=retry_handler)
+        respx_mock.get("/alpha/repos/github").mock(side_effect=retry_handler)
 
-        response = await client.repos.with_raw_response.list("github")
+        response = await client.repos.with_raw_response.retrieve("github")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("solver_api._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("solverai._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     async def test_omit_retry_count_header(
@@ -1551,16 +1551,16 @@ class TestAsyncSolver:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/repos/github").mock(side_effect=retry_handler)
+        respx_mock.get("/alpha/repos/github").mock(side_effect=retry_handler)
 
-        response = await client.repos.with_raw_response.list(
+        response = await client.repos.with_raw_response.retrieve(
             "github", extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("solver_api._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("solverai._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     async def test_overwrite_retry_count_header(
@@ -1577,9 +1577,11 @@ class TestAsyncSolver:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/repos/github").mock(side_effect=retry_handler)
+        respx_mock.get("/alpha/repos/github").mock(side_effect=retry_handler)
 
-        response = await client.repos.with_raw_response.list("github", extra_headers={"x-stainless-retry-count": "42"})
+        response = await client.repos.with_raw_response.retrieve(
+            "github", extra_headers={"x-stainless-retry-count": "42"}
+        )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
@@ -1594,8 +1596,8 @@ class TestAsyncSolver:
         import nest_asyncio
         import threading
 
-        from solver_api._utils import asyncify
-        from solver_api._base_client import get_platform
+        from solverai._utils import asyncify
+        from solverai._base_client import get_platform
 
         async def test_main() -> None:
             result = await asyncify(get_platform)()

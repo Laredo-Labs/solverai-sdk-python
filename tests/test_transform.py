@@ -8,15 +8,15 @@ from typing_extensions import Required, Annotated, TypedDict
 
 import pytest
 
-from solver_api._types import NOT_GIVEN, Base64FileInput
-from solver_api._utils import (
+from solverai._types import NOT_GIVEN, Base64FileInput
+from solverai._utils import (
     PropertyInfo,
     transform as _transform,
     parse_datetime,
     async_transform as _async_transform,
 )
-from solver_api._compat import PYDANTIC_V2
-from solver_api._models import BaseModel
+from solverai._compat import PYDANTIC_V2
+from solverai._models import BaseModel
 
 _T = TypeVar("_T")
 

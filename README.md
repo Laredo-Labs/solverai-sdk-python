@@ -1,6 +1,6 @@
 # Solver Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/solver_api.svg)](https://pypi.org/project/solver_api/)
+[![PyPI version](https://img.shields.io/pypi/v/solverai.svg)](https://pypi.org/project/solverai/)
 
 The Solver Python library provides convenient access to the Solver REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -15,12 +15,12 @@ The REST API documentation can be found on [solverai.com](https://solverai.com).
 ## Installation
 
 ```sh
-# install from the production repo
-pip install git+ssh://git@github.com/Laredo-Labs/solverai-sdk-python.git
+# install from this staging repo
+pip install git+ssh://git@github.com/stainless-sdks/solver-api-python.git
 ```
 
 > [!NOTE]
-> Once this package is [published to PyPI](https://app.stainless.com/docs/guides/publish), this will become: `pip install --pre solver_api`
+> Once this package is [published to PyPI](https://app.stainless.com/docs/guides/publish), this will become: `pip install --pre solverai`
 
 ## Usage
 
@@ -28,20 +28,20 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from solver_api import Solver
+from solverai import Solver
 
 client = Solver(
-    api_key=os.environ.get("SOLVER_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("SOLVER_API_API_KEY"),  # This is the default and can be omitted
 )
 
-repos = client.repos.list(
-    "github",
+repos = client.repos.retrieve(
+    "REPLACE_ME",
 )
 ```
 
 While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `SOLVER_API_KEY="My API Key"` to your `.env` file
+to add `SOLVER_API_API_KEY="My API Key"` to your `.env` file
 so that your API Key is not stored in source control.
 
 ## Async usage
@@ -51,16 +51,16 @@ Simply import `AsyncSolver` instead of `Solver` and use `await` with each API ca
 ```python
 import os
 import asyncio
-from solver_api import AsyncSolver
+from solverai import AsyncSolver
 
 client = AsyncSolver(
-    api_key=os.environ.get("SOLVER_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("SOLVER_API_API_KEY"),  # This is the default and can be omitted
 )
 
 
 async def main() -> None:
-    repos = await client.repos.list(
-        "github",
+    repos = await client.repos.retrieve(
+        "REPLACE_ME",
     )
 
 
@@ -80,29 +80,29 @@ Typed requests and responses provide autocomplete and documentation within your 
 
 ## Handling errors
 
-When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `solver_api.APIConnectionError` is raised.
+When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `solverai.APIConnectionError` is raised.
 
 When the API returns a non-success status code (that is, 4xx or 5xx
-response), a subclass of `solver_api.APIStatusError` is raised, containing `status_code` and `response` properties.
+response), a subclass of `solverai.APIStatusError` is raised, containing `status_code` and `response` properties.
 
-All errors inherit from `solver_api.APIError`.
+All errors inherit from `solverai.APIError`.
 
 ```python
-import solver_api
-from solver_api import Solver
+import solverai
+from solverai import Solver
 
 client = Solver()
 
 try:
-    client.repos.list(
-        "github",
+    client.repos.retrieve(
+        "REPLACE_ME",
     )
-except solver_api.APIConnectionError as e:
+except solverai.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
-except solver_api.RateLimitError as e:
+except solverai.RateLimitError as e:
     print("A 429 status code was received; we should back off a bit.")
-except solver_api.APIStatusError as e:
+except solverai.APIStatusError as e:
     print("Another non-200-range status code was received")
     print(e.status_code)
     print(e.response)
@@ -130,7 +130,7 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from solver_api import Solver
+from solverai import Solver
 
 # Configure the default for all requests:
 client = Solver(
@@ -139,8 +139,8 @@ client = Solver(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).repos.list(
-    "github",
+client.with_options(max_retries=5).repos.retrieve(
+    "REPLACE_ME",
 )
 ```
 
@@ -150,7 +150,7 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
 
 ```python
-from solver_api import Solver
+from solverai import Solver
 
 # Configure the default for all requests:
 client = Solver(
@@ -164,8 +164,8 @@ client = Solver(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).repos.list(
-    "github",
+client.with_options(timeout=5.0).repos.retrieve(
+    "REPLACE_ME",
 )
 ```
 
@@ -204,21 +204,21 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from solver_api import Solver
+from solverai import Solver
 
 client = Solver()
-response = client.repos.with_raw_response.list(
-    "github",
+response = client.repos.with_raw_response.retrieve(
+    "REPLACE_ME",
 )
 print(response.headers.get('X-My-Header'))
 
-repo = response.parse()  # get the object that `repos.list()` would have returned
+repo = response.parse()  # get the object that `repos.retrieve()` would have returned
 print(repo)
 ```
 
-These methods return an [`APIResponse`](https://github.com/Laredo-Labs/solverai-sdk-python/tree/main/src/solver_api/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/stainless-sdks/solver-api-python/tree/main/src/solverai/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/Laredo-Labs/solverai-sdk-python/tree/main/src/solver_api/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/solver-api-python/tree/main/src/solverai/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -227,8 +227,8 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.repos.with_streaming_response.list(
-    "github",
+with client.repos.with_streaming_response.retrieve(
+    "REPLACE_ME",
 ) as response:
     print(response.headers.get("X-My-Header"))
 
@@ -282,7 +282,7 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 
 ```python
 import httpx
-from solver_api import Solver, DefaultHttpxClient
+from solverai import Solver, DefaultHttpxClient
 
 client = Solver(
     # Or use the `SOLVER_BASE_URL` env var
@@ -305,7 +305,7 @@ client.with_options(http_client=DefaultHttpxClient(...))
 By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
 
 ```py
-from solver_api import Solver
+from solverai import Solver
 
 with Solver() as client:
   # make requests here
@@ -324,7 +324,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/Laredo-Labs/solverai-sdk-python/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/solver-api-python/issues) with questions, bugs, or suggestions.
 
 ### Determining the installed version
 
@@ -333,8 +333,8 @@ If you've upgraded to the latest version but aren't seeing any new features you 
 You can determine the version that is being used at runtime with:
 
 ```py
-import solver_api
-print(solver_api.__version__)
+import solverai
+print(solverai.__version__)
 ```
 
 ## Requirements
