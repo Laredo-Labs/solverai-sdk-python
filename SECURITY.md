@@ -20,7 +20,7 @@ or products provided by Solver please follow the respective company's security r
 
 ### Solver Terms and Policies
 
-Please contact hello@solverai.com for any questions or concerns regarding security of our services.
+Please contact support@solverai.com for any questions or concerns regarding security of our services.
 
 ---
 
