@@ -334,21 +334,7 @@ class TestSessions:
             org="org",
             repo="repo",
             instruction="instruction",
-            num_steps=0,
-        )
-        assert_matches_type(Turn, session, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_solve_with_all_params(self, client: Solver) -> None:
-        session = client.repos.sessions.solve(
-            session_id="sessionId",
-            provider="github",
-            org="org",
-            repo="repo",
-            instruction="instruction",
-            num_steps=0,
-            invocation_options={"foo": "string"},
+            num_steps=8,
         )
         assert_matches_type(Turn, session, path=["response"])
 
@@ -361,7 +347,7 @@ class TestSessions:
             org="org",
             repo="repo",
             instruction="instruction",
-            num_steps=0,
+            num_steps=8,
         )
 
         assert response.is_closed is True
@@ -378,7 +364,7 @@ class TestSessions:
             org="org",
             repo="repo",
             instruction="instruction",
-            num_steps=0,
+            num_steps=8,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -398,7 +384,7 @@ class TestSessions:
                 org="",
                 repo="repo",
                 instruction="instruction",
-                num_steps=0,
+                num_steps=8,
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `repo` but received ''"):
@@ -408,7 +394,7 @@ class TestSessions:
                 org="org",
                 repo="",
                 instruction="instruction",
-                num_steps=0,
+                num_steps=8,
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -418,7 +404,7 @@ class TestSessions:
                 org="org",
                 repo="repo",
                 instruction="instruction",
-                num_steps=0,
+                num_steps=8,
             )
 
 
@@ -737,21 +723,7 @@ class TestAsyncSessions:
             org="org",
             repo="repo",
             instruction="instruction",
-            num_steps=0,
-        )
-        assert_matches_type(Turn, session, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_solve_with_all_params(self, async_client: AsyncSolver) -> None:
-        session = await async_client.repos.sessions.solve(
-            session_id="sessionId",
-            provider="github",
-            org="org",
-            repo="repo",
-            instruction="instruction",
-            num_steps=0,
-            invocation_options={"foo": "string"},
+            num_steps=8,
         )
         assert_matches_type(Turn, session, path=["response"])
 
@@ -764,7 +736,7 @@ class TestAsyncSessions:
             org="org",
             repo="repo",
             instruction="instruction",
-            num_steps=0,
+            num_steps=8,
         )
 
         assert response.is_closed is True
@@ -781,7 +753,7 @@ class TestAsyncSessions:
             org="org",
             repo="repo",
             instruction="instruction",
-            num_steps=0,
+            num_steps=8,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -801,7 +773,7 @@ class TestAsyncSessions:
                 org="",
                 repo="repo",
                 instruction="instruction",
-                num_steps=0,
+                num_steps=8,
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `repo` but received ''"):
@@ -811,7 +783,7 @@ class TestAsyncSessions:
                 org="org",
                 repo="",
                 instruction="instruction",
-                num_steps=0,
+                num_steps=8,
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
@@ -821,5 +793,5 @@ class TestAsyncSessions:
                 org="org",
                 repo="repo",
                 instruction="instruction",
-                num_steps=0,
+                num_steps=8,
             )
