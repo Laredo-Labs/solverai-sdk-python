@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-alpha.3 (2025-04-25)
+
+Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/Laredo-Labs/solverai-sdk-python/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
+
+### Features
+
+* **api:** api update ([3ba1eb7](https://github.com/Laredo-Labs/solverai-sdk-python/commit/3ba1eb75634c8475c28b6eccd20828cffe6a1611))
+* **api:** remove vestigial endpoint declarations ([04dba71](https://github.com/Laredo-Labs/solverai-sdk-python/commit/04dba719b87894e58fb9de83365e74fe3b175aff))
+
 ## 0.1.0-alpha.2 (2025-04-25)
 
 Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/Laredo-Labs/solverai-sdk-python/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
