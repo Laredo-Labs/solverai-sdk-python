@@ -34,8 +34,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/stainless-sdks/solver-api-python"
-Repository = "https://github.com/stainless-sdks/solver-api-python"
+Homepage = "https://github.com/Laredo-Labs/solverai-sdk-python"
+Repository = "https://github.com/Laredo-Labs/solverai-sdk-python"
 
 
 [tool.rye]
@@ -121,7 +121,7 @@ path = "README.md"
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
 # replace relative links with absolute links
 pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
-replacement = '[\1](https://github.com/stainless-sdks/solver-api-python/tree/main/\g<2>)'
+replacement = '[\1](https://github.com/Laredo-Labs/solverai-sdk-python/tree/main/\g<2>)'
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
