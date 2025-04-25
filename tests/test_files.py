@@ -4,7 +4,7 @@ import anyio
 import pytest
 from dirty_equals import IsDict, IsList, IsBytes, IsTuple
 
-from solver_api._files import to_httpx_files, async_to_httpx_files
+from solverai._files import to_httpx_files, async_to_httpx_files
 
 readme_path = Path(__file__).parent.parent.joinpath("README.md")
 

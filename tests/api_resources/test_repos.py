@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
-from solver_api import Solver, AsyncSolver
+from solverai import Solver, AsyncSolver
 from tests.utils import assert_matches_type
-from solver_api.types import RepoListResponse
+from solverai.types import RepoRetrieveResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,35 +19,35 @@ class TestRepos:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_list(self, client: Solver) -> None:
-        repo = client.repos.list(
+    def test_method_retrieve(self, client: Solver) -> None:
+        repo = client.repos.retrieve(
             "github",
         )
-        assert_matches_type(RepoListResponse, repo, path=["response"])
+        assert_matches_type(RepoRetrieveResponse, repo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_list(self, client: Solver) -> None:
-        response = client.repos.with_raw_response.list(
+    def test_raw_response_retrieve(self, client: Solver) -> None:
+        response = client.repos.with_raw_response.retrieve(
             "github",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         repo = response.parse()
-        assert_matches_type(RepoListResponse, repo, path=["response"])
+        assert_matches_type(RepoRetrieveResponse, repo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_list(self, client: Solver) -> None:
-        with client.repos.with_streaming_response.list(
+    def test_streaming_response_retrieve(self, client: Solver) -> None:
+        with client.repos.with_streaming_response.retrieve(
             "github",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             repo = response.parse()
-            assert_matches_type(RepoListResponse, repo, path=["response"])
+            assert_matches_type(RepoRetrieveResponse, repo, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -57,34 +57,34 @@ class TestAsyncRepos:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_list(self, async_client: AsyncSolver) -> None:
-        repo = await async_client.repos.list(
+    async def test_method_retrieve(self, async_client: AsyncSolver) -> None:
+        repo = await async_client.repos.retrieve(
             "github",
         )
-        assert_matches_type(RepoListResponse, repo, path=["response"])
+        assert_matches_type(RepoRetrieveResponse, repo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_list(self, async_client: AsyncSolver) -> None:
-        response = await async_client.repos.with_raw_response.list(
+    async def test_raw_response_retrieve(self, async_client: AsyncSolver) -> None:
+        response = await async_client.repos.with_raw_response.retrieve(
             "github",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         repo = await response.parse()
-        assert_matches_type(RepoListResponse, repo, path=["response"])
+        assert_matches_type(RepoRetrieveResponse, repo, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncSolver) -> None:
-        async with async_client.repos.with_streaming_response.list(
+    async def test_streaming_response_retrieve(self, async_client: AsyncSolver) -> None:
+        async with async_client.repos.with_streaming_response.retrieve(
             "github",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             repo = await response.parse()
-            assert_matches_type(RepoListResponse, repo, path=["response"])
+            assert_matches_type(RepoRetrieveResponse, repo, path=["response"])
 
         assert cast(Any, response.is_closed) is True
