@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union
-from typing_extensions import Required, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 from ..vcs_provider import VcsProvider
@@ -20,7 +19,5 @@ class SessionSolveParams(TypedDict, total=False):
 
     instruction: Required[str]
 
-    num_steps: Required[Annotated[int, PropertyInfo(alias="numSteps")]]
+    num_steps: Required[Annotated[Literal[8, 16, 24, 32, 40], PropertyInfo(alias="numSteps")]]
     """The maximum number of steps to take when Solving"""
-
-    invocation_options: Annotated[Dict[str, Union[str, bool, float]], PropertyInfo(alias="invocationOptions")]
