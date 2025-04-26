@@ -345,6 +345,36 @@ class SessionsResource(SyncAPIResource):
             cast_to=Turn,
         )
 
+    def create_and_solve(
+        self,
+        repo: str,
+        *,
+        provider: VcsProvider,
+        org: str,
+        user_branch_name: str,
+        instruction: str,
+        num_steps: Literal[8, 16, 24, 32, 40],
+        description: str | NotGiven = NOT_GIVEN,
+        title: str | NotGiven = NOT_GIVEN,
+        visibility: SessionVisibility | NotGiven = NOT_GIVEN,
+    ) -> Turn:
+        session = self.create(
+            repo=repo,
+            provider=provider,
+            org=org,
+            user_branch_name=user_branch_name,
+            description=description,
+            title=title,
+            visibility=visibility,
+        )
+        return self.solve(
+            session_id=session.id,
+            provider=provider,
+            org=org,
+            repo=repo,
+            instruction=instruction,
+            num_steps=num_steps,
+        )
 
 class AsyncSessionsResource(AsyncAPIResource):
     @cached_property
@@ -628,6 +658,37 @@ class AsyncSessionsResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Turn,
+        )
+
+    async def create_and_solve(
+        self,
+        repo: str,
+        *,
+        provider: VcsProvider,
+        org: str,
+        user_branch_name: str,
+        instruction: str,
+        num_steps: Literal[8, 16, 24, 32, 40],
+        description: str | NotGiven = NOT_GIVEN,
+        title: str | NotGiven = NOT_GIVEN,
+        visibility: SessionVisibility | NotGiven = NOT_GIVEN,
+    ) -> Turn:
+        session = await self.create(
+            repo=repo,
+            provider=provider,
+            org=org,
+            user_branch_name=user_branch_name,
+            description=description,
+            title=title,
+            visibility=visibility,
+        )
+        return await self.solve(
+            session_id=session.id,
+            provider=provider,
+            org=org,
+            repo=repo,
+            instruction=instruction,
+            num_steps=num_steps,
         )
 
 
