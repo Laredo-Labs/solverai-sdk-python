@@ -376,6 +376,40 @@ class SessionsResource(SyncAPIResource):
             num_steps=num_steps,
         )
 
+    def wait_for_completion(
+        self,
+        session_id: str,
+        *,
+        provider: VcsProvider,
+        org: str,
+        repo: str,
+    ) -> None:
+        with self.status.stream(
+            provider=provider,
+            org=org,
+            repo=repo,
+            session_filter=[session_id],
+        ) as status_stream:
+            session = self.get(
+                provider=provider,
+                org=org,
+                repo=repo,
+                session_id=session_id,
+            )
+            while session.status != "ready":
+                try:
+                    event = next(status_stream)
+                    assert event.session_id == session_id
+                    session = self.get(
+                        provider=provider,
+                        org=org,
+                        repo=repo,
+                        session_id=session_id,
+                    )
+                except StopIteration:
+                    raise Exception("Session status stream ended unexpectedly") from None
+
+
 class AsyncSessionsResource(AsyncAPIResource):
     @cached_property
     def status(self) -> AsyncStatusResource:
@@ -690,6 +724,39 @@ class AsyncSessionsResource(AsyncAPIResource):
             instruction=instruction,
             num_steps=num_steps,
         )
+
+    async def wait_for_completion(
+        self,
+        session_id: str,
+        *,
+        provider: VcsProvider,
+        org: str,
+        repo: str,
+    ) -> None:
+        async with await self.status.stream(
+            provider=provider,
+            org=org,
+            repo=repo,
+            session_filter=[session_id],
+        ) as status_stream:
+            session = await self.get(
+                provider=provider,
+                org=org,
+                repo=repo,
+                session_id=session_id,
+            )
+            while session.status != "ready":
+                try:
+                    event = await status_stream.__anext__()
+                    assert event.session_id == session_id
+                    session = await self.get(
+                        provider=provider,
+                        org=org,
+                        repo=repo,
+                        session_id=session_id,
+                    )
+                except StopIteration:
+                    raise Exception("Session status stream ended unexpectedly") from None
 
 
 class SessionsResourceWithRawResponse:
