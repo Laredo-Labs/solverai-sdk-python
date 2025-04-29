@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.0-alpha.4 (2025-04-29)
+
+Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/Laredo-Labs/solverai-sdk-python/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)
+
+### Features
+
+* **api:** added wait_for_completion methods ([3b6633d](https://github.com/Laredo-Labs/solverai-sdk-python/commit/3b6633d9f252d84e4e33ce8e92be979d0c74068e))
+* **api:** api update ([d1d07c5](https://github.com/Laredo-Labs/solverai-sdk-python/commit/d1d07c5c7040742ea0bf22e439987441289f528e))
+* **api:** introduce create_and_solve methods ([43006c3](https://github.com/Laredo-Labs/solverai-sdk-python/commit/43006c3ab5d11305016b56b1db0fdd0ab2121894))
+
 ## 0.1.0-alpha.3 (2025-04-25)
 
 Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/Laredo-Labs/solverai-sdk-python/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
