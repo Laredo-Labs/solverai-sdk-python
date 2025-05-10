@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-alpha.5 (2025-05-10)
+
+Full Changelog: [v0.1.0-alpha.4...v0.1.0-alpha.5](https://github.com/Laredo-Labs/solverai-sdk-python/compare/v0.1.0-alpha.4...v0.1.0-alpha.5)
+
+### Features
+
+* **api:** api update ([8692a9f](https://github.com/Laredo-Labs/solverai-sdk-python/commit/8692a9fe38da5c7943bb4fd8046f6b6e6e52256a))
+
+
+### Chores
+
+* **docs:** use Sandbox repo in examples ([a0e6899](https://github.com/Laredo-Labs/solverai-sdk-python/commit/a0e6899f74473e705c3661cf05ab2a32fe99b427))
+* **internal:** avoid errors for isinstance checks on proxies ([94adc9f](https://github.com/Laredo-Labs/solverai-sdk-python/commit/94adc9f493a0a31fbee1fda66100579fd0f664f5))
+
 ## 0.1.0-alpha.4 (2025-04-29)
 
 Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/Laredo-Labs/solverai-sdk-python/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)
