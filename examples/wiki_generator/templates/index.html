@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solver Documentation Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Solver Documentation Generator</h1>
+            <p class="subtitle">Powered by <a href="https://solverai.com">Solver</a></p>
+            {% if error %}
+            <div class="error-message">
+                {{ error }}
+            </div>
+            {% endif %}
+        </header>
+        
+        <div class="search-container">
+            <form action="{{ url_for('search') }}" method="post">
+                <div class="search-box">
+                    <select name="repository" required>
+                        <option value="">Select Repository</option>
+                        {% for repo in repositories %}
+                        <option value="{{ repo }}">{{ repo }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="text" 
+                           name="query" 
+                           placeholder="What would you like to document?" 
+                           required>
+                    <button type="submit">Generate Documentation</button>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+</body>
+</html>
