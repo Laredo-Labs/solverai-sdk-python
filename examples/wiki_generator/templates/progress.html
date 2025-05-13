@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Refresh every 10 seconds -->
+    <meta http-equiv="refresh" content="10;url={{ url_for('progress', query=query, doc_id=doc_id, repository=repository) }}">
+    <title>Generating Documentation...</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 90%;
+        }
+        h1 {
+            color: #444;
+            margin-bottom: 20px;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .loader {
+            border: 5px solid #f3f3f3; /* Light grey */
+            border-top: 5px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .status-message {
+            font-weight: bold;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e7f3fe;
+            border-left: 4px solid #2196F3;
+            color: #222;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Generating Documentation</h1>
+        <p><strong>Query:</strong> {{ query }}</p>
+        <p><strong>Repository:</strong> {{ repository }}</p>
+        
+        <p>Please wait while the documentation is being generated for you. This page will automatically refresh every 10 seconds.</p>
+        
+        <div class="loader"></div>
+
+        {% if status_message %}
+            <p class="status-message">{{ status_message }}</p>
+        {% endif %}
+        
+        <p><a href="{{ url_for('index') }}">Cancel and return to home</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation Results - Solver</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Solver Documentation Generator</h1>
+            <p class="subtitle">Documentation results for your query</p>
+        </header>
+        
+        <div class="search-container results-search">
+            <form action="{{ url_for('search') }}" method="post">
+                <div class="search-box">
+                    <input type="text" name="query" placeholder="What do you want to document?" value="{{ query }}" required>
+                    <button type="submit">Generate Docs</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="results-summary">
+            <h2>Documentation Generated for: "{{ query }}"</h2>
+            <p>Generation completed in 2 minutes and 47 seconds</p>
+        </div>
+        
+        <div class="results-container">
+            {% for result in results %}
+            <div class="result-card">
+                <h3><a href="{{ result.url }}">{{ result.title }}</a></h3>
+                <p class="result-description">{{ result.description }}</p>
+                <div class="result-meta">
+                    <span class="result-type">Documentation</span>
+                    <span class="result-generated">Generated just now</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="results-info">
+            <h3>About These Results</h3>
+            <p>The documentation above was generated based on your query and analysis of the codebase. 
+            Click on any result to view the detailed documentation. You can regenerate or refine the 
+            documentation by entering a new query above.</p>
+        </div>
+    </div>
+</body>
+</html>

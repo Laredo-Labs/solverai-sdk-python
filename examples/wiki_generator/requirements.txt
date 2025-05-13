@@ -1,0 +1,2 @@
+solverai==0.1.0a4
+flask==3.0.2
