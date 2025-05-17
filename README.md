@@ -32,7 +32,7 @@ client = Solver(
 )
 
 session = client.repos.sessions.create(
-    repo="solverai-sdk-python",
+    repo="Sandbox",
     provider="github",
     org="Laredo-Labs",
     user_branch_name="main",
@@ -61,7 +61,7 @@ client = AsyncSolver(
 
 async def main() -> None:
     session = await client.repos.sessions.create(
-        repo="solverai-sdk-python",
+        repo="Sandbox",
         provider="github",
         org="Laredo-Labs",
         user_branch_name="main",
@@ -100,7 +100,7 @@ client = Solver()
 
 try:
     client.repos.sessions.create(
-        repo="solverai-sdk-python",
+        repo="Sandbox",
         provider="github",
         org="Laredo-Labs",
         user_branch_name="main",
@@ -148,7 +148,7 @@ client = Solver(
 
 # Or, configure per-request:
 client.with_options(max_retries=5).repos.sessions.create(
-    repo="solverai-sdk-python",
+    repo="Sandbox",
     provider="github",
     org="Laredo-Labs",
     user_branch_name="main",
@@ -176,7 +176,7 @@ client = Solver(
 
 # Override per-request:
 client.with_options(timeout=5.0).repos.sessions.create(
-    repo="solverai-sdk-python",
+    repo="Sandbox",
     provider="github",
     org="Laredo-Labs",
     user_branch_name="main",
@@ -222,7 +222,7 @@ from solverai import Solver
 
 client = Solver()
 response = client.repos.sessions.with_raw_response.create(
-    repo="solverai-sdk-python",
+    repo="Sandbox",
     provider="github",
     org="Laredo-Labs",
     user_branch_name="main",
@@ -245,7 +245,7 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 
 ```python
 with client.repos.sessions.with_streaming_response.create(
-    repo="solverai-sdk-python",
+    repo="Sandbox",
     provider="github",
     org="Laredo-Labs",
     user_branch_name="main",
