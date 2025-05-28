@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.1.0-alpha.5 (2025-05-28)
+
+Full Changelog: [v0.1.0-alpha.4...v0.1.0-alpha.5](https://github.com/Laredo-Labs/solverai-sdk-python/compare/v0.1.0-alpha.4...v0.1.0-alpha.5)
+
+### Features
+
+* **api:** api update ([fbb59a0](https://github.com/Laredo-Labs/solverai-sdk-python/commit/fbb59a03fe9493129ab3aa21ec141a5cc212ddba))
+* **api:** change localization APIs ([fd816ad](https://github.com/Laredo-Labs/solverai-sdk-python/commit/fd816ad449ebd4a5854cc6ec87ec4d38c2da53d1))
+
+
+### Bug Fixes
+
+* **package:** support direct resource imports ([10e8f06](https://github.com/Laredo-Labs/solverai-sdk-python/commit/10e8f0654a7cbaef8904555ccc00d8a142a03071))
+
+
+### Chores
+
+* **ci:** fix installation instructions ([7c030e9](https://github.com/Laredo-Labs/solverai-sdk-python/commit/7c030e945fecfbefc52efd57c9c598741b7d3d53))
+* **ci:** upload sdks to package manager ([1cf1dda](https://github.com/Laredo-Labs/solverai-sdk-python/commit/1cf1ddab93b0aa92ccae0979ef2f66c5fb6f6b4c))
+* **docs:** grammar improvements ([c1f9854](https://github.com/Laredo-Labs/solverai-sdk-python/commit/c1f98549dcaf2865c26d4b07489998aeae4aefdb))
+* **docs:** use Sandbox repo in examples ([79947e1](https://github.com/Laredo-Labs/solverai-sdk-python/commit/79947e1bf4459bd74741e1a06f9eb95a1df8d29b))
+* **internal:** avoid errors for isinstance checks on proxies ([52844ce](https://github.com/Laredo-Labs/solverai-sdk-python/commit/52844ce238bf470cb1fb252ec0ddd5787132a5f3))
+* **internal:** codegen related update ([d3194a5](https://github.com/Laredo-Labs/solverai-sdk-python/commit/d3194a52b6781fbc8c1f00839b9650090ce6f3f1))
+
 ## 0.1.0-alpha.4 (2025-04-29)
 
 Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/Laredo-Labs/solverai-sdk-python/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)
