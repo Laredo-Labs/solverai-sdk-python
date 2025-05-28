@@ -10,7 +10,7 @@ import pytest
 from solverai import Solver, AsyncSolver
 from tests.utils import assert_matches_type
 from solverai.types.repos import Turn
-from solverai.types.repos.sessions import TurnListResponse, TurnGetPatchResponse
+from solverai.types.repos.sessions import TurnListResponse, TurnGetPatchResponse, TurnGetChangeLocalizationsResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -251,6 +251,91 @@ class TestTurns:
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `turn_id` but received ''"):
             client.repos.sessions.turns.with_raw_response.get(
+                turn_id="",
+                provider="github",
+                org="org",
+                repo="repo",
+                session_id="sessionId",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_get_change_localizations(self, client: Solver) -> None:
+        turn = client.repos.sessions.turns.get_change_localizations(
+            turn_id="turnId",
+            provider="github",
+            org="org",
+            repo="repo",
+            session_id="sessionId",
+        )
+        assert_matches_type(TurnGetChangeLocalizationsResponse, turn, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_get_change_localizations(self, client: Solver) -> None:
+        response = client.repos.sessions.turns.with_raw_response.get_change_localizations(
+            turn_id="turnId",
+            provider="github",
+            org="org",
+            repo="repo",
+            session_id="sessionId",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        turn = response.parse()
+        assert_matches_type(TurnGetChangeLocalizationsResponse, turn, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_get_change_localizations(self, client: Solver) -> None:
+        with client.repos.sessions.turns.with_streaming_response.get_change_localizations(
+            turn_id="turnId",
+            provider="github",
+            org="org",
+            repo="repo",
+            session_id="sessionId",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            turn = response.parse()
+            assert_matches_type(TurnGetChangeLocalizationsResponse, turn, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_get_change_localizations(self, client: Solver) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
+            client.repos.sessions.turns.with_raw_response.get_change_localizations(
+                turn_id="turnId",
+                provider="github",
+                org="",
+                repo="repo",
+                session_id="sessionId",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `repo` but received ''"):
+            client.repos.sessions.turns.with_raw_response.get_change_localizations(
+                turn_id="turnId",
+                provider="github",
+                org="org",
+                repo="",
+                session_id="sessionId",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
+            client.repos.sessions.turns.with_raw_response.get_change_localizations(
+                turn_id="turnId",
+                provider="github",
+                org="org",
+                repo="repo",
+                session_id="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `turn_id` but received ''"):
+            client.repos.sessions.turns.with_raw_response.get_change_localizations(
                 turn_id="",
                 provider="github",
                 org="org",
@@ -580,6 +665,91 @@ class TestAsyncTurns:
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `turn_id` but received ''"):
             await async_client.repos.sessions.turns.with_raw_response.get(
+                turn_id="",
+                provider="github",
+                org="org",
+                repo="repo",
+                session_id="sessionId",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_get_change_localizations(self, async_client: AsyncSolver) -> None:
+        turn = await async_client.repos.sessions.turns.get_change_localizations(
+            turn_id="turnId",
+            provider="github",
+            org="org",
+            repo="repo",
+            session_id="sessionId",
+        )
+        assert_matches_type(TurnGetChangeLocalizationsResponse, turn, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_get_change_localizations(self, async_client: AsyncSolver) -> None:
+        response = await async_client.repos.sessions.turns.with_raw_response.get_change_localizations(
+            turn_id="turnId",
+            provider="github",
+            org="org",
+            repo="repo",
+            session_id="sessionId",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        turn = await response.parse()
+        assert_matches_type(TurnGetChangeLocalizationsResponse, turn, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_get_change_localizations(self, async_client: AsyncSolver) -> None:
+        async with async_client.repos.sessions.turns.with_streaming_response.get_change_localizations(
+            turn_id="turnId",
+            provider="github",
+            org="org",
+            repo="repo",
+            session_id="sessionId",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            turn = await response.parse()
+            assert_matches_type(TurnGetChangeLocalizationsResponse, turn, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_get_change_localizations(self, async_client: AsyncSolver) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
+            await async_client.repos.sessions.turns.with_raw_response.get_change_localizations(
+                turn_id="turnId",
+                provider="github",
+                org="",
+                repo="repo",
+                session_id="sessionId",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `repo` but received ''"):
+            await async_client.repos.sessions.turns.with_raw_response.get_change_localizations(
+                turn_id="turnId",
+                provider="github",
+                org="org",
+                repo="",
+                session_id="sessionId",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
+            await async_client.repos.sessions.turns.with_raw_response.get_change_localizations(
+                turn_id="turnId",
+                provider="github",
+                org="org",
+                repo="repo",
+                session_id="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `turn_id` but received ''"):
+            await async_client.repos.sessions.turns.with_raw_response.get_change_localizations(
                 turn_id="",
                 provider="github",
                 org="org",

@@ -327,6 +327,82 @@ class TestSessions:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_request_change_localizations(self, client: Solver) -> None:
+        session = client.repos.sessions.request_change_localizations(
+            session_id="sessionId",
+            provider="github",
+            org="org",
+            repo="repo",
+            instruction="instruction",
+        )
+        assert_matches_type(Turn, session, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_request_change_localizations(self, client: Solver) -> None:
+        response = client.repos.sessions.with_raw_response.request_change_localizations(
+            session_id="sessionId",
+            provider="github",
+            org="org",
+            repo="repo",
+            instruction="instruction",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        session = response.parse()
+        assert_matches_type(Turn, session, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_request_change_localizations(self, client: Solver) -> None:
+        with client.repos.sessions.with_streaming_response.request_change_localizations(
+            session_id="sessionId",
+            provider="github",
+            org="org",
+            repo="repo",
+            instruction="instruction",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            session = response.parse()
+            assert_matches_type(Turn, session, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_request_change_localizations(self, client: Solver) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
+            client.repos.sessions.with_raw_response.request_change_localizations(
+                session_id="sessionId",
+                provider="github",
+                org="",
+                repo="repo",
+                instruction="instruction",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `repo` but received ''"):
+            client.repos.sessions.with_raw_response.request_change_localizations(
+                session_id="sessionId",
+                provider="github",
+                org="org",
+                repo="",
+                instruction="instruction",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
+            client.repos.sessions.with_raw_response.request_change_localizations(
+                session_id="",
+                provider="github",
+                org="org",
+                repo="repo",
+                instruction="instruction",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
     def test_method_solve(self, client: Solver) -> None:
         session = client.repos.sessions.solve(
             session_id="sessionId",
@@ -712,6 +788,82 @@ class TestAsyncSessions:
                 provider="github",
                 org="org",
                 repo="repo",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_request_change_localizations(self, async_client: AsyncSolver) -> None:
+        session = await async_client.repos.sessions.request_change_localizations(
+            session_id="sessionId",
+            provider="github",
+            org="org",
+            repo="repo",
+            instruction="instruction",
+        )
+        assert_matches_type(Turn, session, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_request_change_localizations(self, async_client: AsyncSolver) -> None:
+        response = await async_client.repos.sessions.with_raw_response.request_change_localizations(
+            session_id="sessionId",
+            provider="github",
+            org="org",
+            repo="repo",
+            instruction="instruction",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        session = await response.parse()
+        assert_matches_type(Turn, session, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_request_change_localizations(self, async_client: AsyncSolver) -> None:
+        async with async_client.repos.sessions.with_streaming_response.request_change_localizations(
+            session_id="sessionId",
+            provider="github",
+            org="org",
+            repo="repo",
+            instruction="instruction",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            session = await response.parse()
+            assert_matches_type(Turn, session, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_request_change_localizations(self, async_client: AsyncSolver) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `org` but received ''"):
+            await async_client.repos.sessions.with_raw_response.request_change_localizations(
+                session_id="sessionId",
+                provider="github",
+                org="",
+                repo="repo",
+                instruction="instruction",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `repo` but received ''"):
+            await async_client.repos.sessions.with_raw_response.request_change_localizations(
+                session_id="sessionId",
+                provider="github",
+                org="org",
+                repo="",
+                instruction="instruction",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
+            await async_client.repos.sessions.with_raw_response.request_change_localizations(
+                session_id="",
+                provider="github",
+                org="org",
+                repo="repo",
+                instruction="instruction",
             )
 
     @pytest.mark.skip()

@@ -12,3 +12,6 @@ from .session_create_params import SessionCreateParams as SessionCreateParams
 from .session_list_response import SessionListResponse as SessionListResponse
 from .session_get_patch_params import SessionGetPatchParams as SessionGetPatchParams
 from .session_get_patch_response import SessionGetPatchResponse as SessionGetPatchResponse
+from .session_request_change_localizations_params import (
+    SessionRequestChangeLocalizationsParams as SessionRequestChangeLocalizationsParams,
+)
