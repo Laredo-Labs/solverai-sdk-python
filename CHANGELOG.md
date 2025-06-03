@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-alpha.6 (2025-06-03)
+
+Full Changelog: [v0.1.0-alpha.5...v0.1.0-alpha.6](https://github.com/Laredo-Labs/solverai-sdk-python/compare/v0.1.0-alpha.5...v0.1.0-alpha.6)
+
+### Features
+
+* **client:** add follow_redirects request option ([c95346d](https://github.com/Laredo-Labs/solverai-sdk-python/commit/c95346d54d8de3668375c8be3b11b42da4c6c57e))
+
+
+### Chores
+
+* **docs:** remove reference to rye shell ([b72bf2d](https://github.com/Laredo-Labs/solverai-sdk-python/commit/b72bf2decfa2de0939062186a61db6c51c420c74))
+
 ## 0.1.0-alpha.5 (2025-05-28)
 
 Full Changelog: [v0.1.0-alpha.4...v0.1.0-alpha.5](https://github.com/Laredo-Labs/solverai-sdk-python/compare/v0.1.0-alpha.4...v0.1.0-alpha.5)
