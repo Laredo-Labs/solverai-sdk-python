@@ -37,6 +37,8 @@ classifiers = [
 Homepage = "https://github.com/Laredo-Labs/solverai-sdk-python"
 Repository = "https://github.com/Laredo-Labs/solverai-sdk-python"
 
+[project.optional-dependencies]
+aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.6"]
 
 [tool.rye]
 managed = true
