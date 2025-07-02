@@ -1,5 +1,40 @@
 # Changelog
 
+## 0.1.0-alpha.6 (2025-07-02)
+
+Full Changelog: [v0.1.0-alpha.5...v0.1.0-alpha.6](https://github.com/Laredo-Labs/solverai-sdk-python/compare/v0.1.0-alpha.5...v0.1.0-alpha.6)
+
+### Features
+
+* **client:** add follow_redirects request option ([c95346d](https://github.com/Laredo-Labs/solverai-sdk-python/commit/c95346d54d8de3668375c8be3b11b42da4c6c57e))
+* **client:** add support for aiohttp ([ae63fa8](https://github.com/Laredo-Labs/solverai-sdk-python/commit/ae63fa80bb13fc414a233c9de700d697f1aa2939))
+
+
+### Bug Fixes
+
+* **ci:** correct conditional ([6d7672d](https://github.com/Laredo-Labs/solverai-sdk-python/commit/6d7672d2b9c01ff24cbae81a6224f8f50a294d67))
+* **ci:** release-doctor — report correct token name ([f4cbba9](https://github.com/Laredo-Labs/solverai-sdk-python/commit/f4cbba90a637aa050bf574d65c3a1dcf09bd4cb2))
+* **client:** correctly parse binary response | stream ([afb303a](https://github.com/Laredo-Labs/solverai-sdk-python/commit/afb303ae063e9b7a33cba3c6027e193319d6ff2e))
+* **tests:** fix: tests which call HTTP endpoints directly with the example parameters ([9c10420](https://github.com/Laredo-Labs/solverai-sdk-python/commit/9c104203d955bd80a61ed8f7b9b1624effeeb722))
+
+
+### Chores
+
+* **ci:** change upload type ([bd43fa1](https://github.com/Laredo-Labs/solverai-sdk-python/commit/bd43fa10bcb7408bf9f96466b583881933add46c))
+* **ci:** enable for pull requests ([c079ebc](https://github.com/Laredo-Labs/solverai-sdk-python/commit/c079ebc8d1e807a3ca8bc6af241eb30dc5d5ffca))
+* **ci:** only run for pushes and fork pull requests ([8f32b36](https://github.com/Laredo-Labs/solverai-sdk-python/commit/8f32b36f84635831d9b57fda36b29f32ec63b31e))
+* **docs:** remove reference to rye shell ([b72bf2d](https://github.com/Laredo-Labs/solverai-sdk-python/commit/b72bf2decfa2de0939062186a61db6c51c420c74))
+* **internal:** update conftest.py ([a218d78](https://github.com/Laredo-Labs/solverai-sdk-python/commit/a218d788fc14ecdc32a554fa3982c585527377f7))
+* **readme:** update badges ([634dc80](https://github.com/Laredo-Labs/solverai-sdk-python/commit/634dc806aa4109a5e061fe9ee8b3bfd6271c24c8))
+* **tests:** add tests for httpx client instantiation & proxies ([5b7d79c](https://github.com/Laredo-Labs/solverai-sdk-python/commit/5b7d79cf7c8e982d206b4644994b951aaf8b6ba6))
+* **tests:** run tests in parallel ([e7ef8cb](https://github.com/Laredo-Labs/solverai-sdk-python/commit/e7ef8cbffcc14a38c8c61cdd528bd0d5f3b2fded))
+* **tests:** skip some failing tests on the latest python versions ([7b4f891](https://github.com/Laredo-Labs/solverai-sdk-python/commit/7b4f8919840448fdf9968e6eda9c9164eb8bec3e))
+
+
+### Documentation
+
+* **client:** fix httpx.Timeout documentation reference ([40eb1f0](https://github.com/Laredo-Labs/solverai-sdk-python/commit/40eb1f0968839d3e384fdbcf41ac33fdf7f8b3de))
+
 ## 0.1.0-alpha.5 (2025-05-28)
 
 Full Changelog: [v0.1.0-alpha.4...v0.1.0-alpha.5](https://github.com/Laredo-Labs/solverai-sdk-python/compare/v0.1.0-alpha.4...v0.1.0-alpha.5)
