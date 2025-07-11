@@ -1,6 +1,7 @@
 # Solver Python API library
 
-[![PyPI version](<https://img.shields.io/pypi/v/solverai.svg?label=pypi%20(stable)>)](https://pypi.org/project/solverai/)
+<!-- prettier-ignore -->
+[![PyPI version](https://img.shields.io/pypi/v/solverai.svg?label=pypi%20(stable))](https://pypi.org/project/solverai/)
 
 The Solver Python library provides convenient access to the Solver REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
