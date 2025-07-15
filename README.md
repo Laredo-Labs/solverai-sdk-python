@@ -89,7 +89,6 @@ pip install --pre solverai[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
-import os
 import asyncio
 from solverai import DefaultAioHttpClient
 from solverai import AsyncSolver
@@ -97,7 +96,7 @@ from solverai import AsyncSolver
 
 async def main() -> None:
     async with AsyncSolver(
-        api_key=os.environ.get("SOLVER_API_KEY"),  # This is the default and can be omitted
+        api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
         session = await client.repos.sessions.create(
