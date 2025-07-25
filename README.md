@@ -1,6 +1,7 @@
 # Solver Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/solverai.svg)](https://pypi.org/project/solverai/)
+<!-- prettier-ignore -->
+[![PyPI version](https://img.shields.io/pypi/v/solverai.svg?label=pypi%20(stable))](https://pypi.org/project/solverai/)
 
 The Solver Python library provides convenient access to the Solver REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -73,6 +74,42 @@ asyncio.run(main())
 ```
 
 Functionality between the synchronous and asynchronous clients is otherwise identical.
+
+### With aiohttp
+
+By default, the async client uses `httpx` for HTTP requests. However, for improved concurrency performance you may also use `aiohttp` as the HTTP backend.
+
+You can enable this by installing `aiohttp`:
+
+```sh
+# install from PyPI
+pip install --pre solverai[aiohttp]
+```
+
+Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
+
+```python
+import asyncio
+from solverai import DefaultAioHttpClient
+from solverai import AsyncSolver
+
+
+async def main() -> None:
+    async with AsyncSolver(
+        api_key="My API Key",
+        http_client=DefaultAioHttpClient(),
+    ) as client:
+        session = await client.repos.sessions.create(
+            repo="Sandbox",
+            provider="github",
+            org="Laredo-Labs",
+            user_branch_name="main",
+        )
+        print(session.id)
+
+
+asyncio.run(main())
+```
 
 ## Using types
 
@@ -158,7 +195,7 @@ client.with_options(max_retries=5).repos.sessions.create(
 ### Timeouts
 
 By default requests time out after 1 minute. You can configure this with a `timeout` option,
-which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
+which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
 from solverai import Solver
